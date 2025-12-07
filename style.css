@@ -1,265 +1,342 @@
 /* ---------------------------------- */
-/* 1. Variables and Basics */
+/* 1. Variables and Reset */
 /* ---------------------------------- */
 :root {
-    --primary-color: #007bff; 
-    --secondary-color: #212529; 
-    --background-color: #f8f9fa; 
-    --text-color: #343a40;
-    --card-bg: #ffffff;
-    --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
-    --border-radius: 8px;
+    --primary-color: #007bff;
+    --primary-dark: #0056b3;
+    --secondary-color: #1a1a1a; /* Darker for better contrast */
+    --background-color: #f0f2f5;
+    --text-color: #333;
+    --text-light: #666;
+    --white: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.95);
+    --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
 }
 
-/* Base and Typography */
-body {
-    font-family: 'Arial', sans-serif;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* Recommended font if available */
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
-    text-align: left; 
-    direction: ltr; /* Set direction to LTR (Left-to-Right) */
+    overflow-x: hidden;
 }
 
-a {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: color 0.3s;
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ---------------------------------- */
+/* 2. Navigation Bar (Modern Sticky) */
+/* ---------------------------------- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 5%;
+    background: transparent;
+    z-index: 1000;
+    transition: var(--transition);
 }
 
-.section {
-    padding: 100px 5%; 
+.navbar.scrolled {
+    background: rgba(33, 37, 41, 0.95); /* Dark background when scrolled */
+    padding: 15px 5%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px); /* Blur effect */
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 50px;
-    color: var(--secondary-color);
-    font-size: 2.5em;
+.logo {
+    font-size: 1.8rem;
     font-weight: 700;
-    position: relative;
-    padding-bottom: 10px;
+    color: var(--white);
+    letter-spacing: 1px;
 }
-h2::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 3px;
-    background-color: var(--primary-color);
-    margin: 5px auto 0;
-    border-radius: 2px;
-}
+.logo span { color: var(--primary-color); }
 
-/* ---------------------------------- */
-/* 2. Navigation Bar (المُعدَّل) */
-/* ---------------------------------- */
-.navbar {
-    background-color: var(--secondary-color);
-    padding: 15px 5%;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: var(--shadow-light);
-}
-.navbar nav {
-    /* التعديل: نستخدم التوزيع المتساوي */
+.nav-links {
     display: flex;
-    justify-content: space-around; /* توزيع الروابط بالتساوي على الشاشات الكبيرة */
-    flex-wrap: nowrap; /* منع النزول لسطر جديد على الشاشات الكبيرة */
-    gap: 10px;
-    max-width: 1000px; /* لتقييد العرض في الوسط */
-    margin: 0 auto;
-}
-.navbar a {
-    color: white;
-    padding: 10px 18px;
-    margin: 0; /* إزالة المسافات الجانبية التي قد تعيق التوزيع */
-    font-weight: 500;
-    transition: background-color 0.3s, color 0.3s;
-    border-radius: 5px;
-}
-.navbar a:hover, .navbar a.active {
-    background-color: var(--primary-color);
-    color: white;
-    text-decoration: none;
-}
-.navbar a i {
-    margin-right: 8px;
+    gap: 30px;
 }
 
-/* ---------------------------------- */
-/* 3. Hero Section */
-/* ---------------------------------- */
-.hero {
-    background: linear-gradient(135deg, var(--secondary-color), #0f1621);
-    color: white;
-    padding: 150px 5%; 
-    text-align: center;
+.nav-links a {
+    color: #ddd;
+    font-weight: 500;
+    font-size: 1rem;
+    position: relative;
+    transition: var(--transition);
 }
-.hero h1 {
-    font-size: 4.5em;
-    margin: 0 0 10px;
+
+.nav-links a:hover, .nav-links a.active {
     color: var(--primary-color);
 }
-.hero h2 {
-    font-size: 1.8em;
-    color: #ced4da;
-    margin-bottom: 30px;
-    font-weight: 300;
+
+/* Underline Animation */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: var(--transition);
 }
-.hero h2::after { display: none; }
+.nav-links a:hover::after, .nav-links a.active::after {
+    width: 100%;
+}
+
+/* Hamburger Menu (Hidden on Desktop) */
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+.line {
+    width: 25px;
+    height: 3px;
+    background-color: var(--white);
+    margin: 5px;
+    transition: var(--transition);
+}
+
+/* ---------------------------------- */
+/* 3. Hero Section (Animated) */
+/* ---------------------------------- */
+.hero {
+    height: 100vh;
+    background: linear-gradient(135deg, #111, #222);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    position: relative;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    margin: 10px 0;
+    background: linear-gradient(to right, var(--primary-color), #00d2ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #ccc;
+    margin-bottom: 20px;
+    min-height: 30px;
+}
+
+.cursor {
+    display: inline-block;
+    width: 2px;
+    background-color: var(--primary-color);
+    animation: blink 1s infinite;
+}
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
 .cta-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.main-cta-btn, .secondary-cta-btn {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 2px solid var(--primary-color);
+}
+
+.main-cta-btn {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.main-cta-btn:hover {
+    background: transparent;
+    color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.secondary-cta-btn {
+    background: transparent;
+    color: var(--white);
+    border-color: var(--white);
+}
+
+.secondary-cta-btn:hover {
+    background: var(--white);
+    color: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+/* ---------------------------------- */
+/* 4. Sections Styling */
+/* ---------------------------------- */
+.section {
+    padding: 80px 10%;
+}
+
+h2.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: var(--secondary-color);
+}
+
+/* Stats */
+.stats-grid {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+    text-align: center;
+}
+.stat-item h3 { font-size: 2.5rem; color: var(--primary-color); }
+.stat-item p { color: var(--text-light); }
+
+/* Skills */
+.skills-category {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+    transition: var(--transition);
+}
+.skills-category:hover { transform: translateY(-5px); }
+
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.skill-tag {
+    background: #f8f9fa;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    border: 1px solid #eee;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.skill-tag:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+/* Contact */
+.contact-section { text-align: center; background: var(--white); }
+.social-links {
+    margin-top: 30px;
     display: flex;
     justify-content: center;
     gap: 20px;
 }
-.main-cta-btn, .secondary-cta-btn {
-    border: none;
-    padding: 15px 35px;
-    font-size: 1.1em;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: bold;
-}
-.main-cta-btn {
-    background-color: var(--primary-color);
-    color: white;
-}
-/* ... rest of the CSS for other sections remains similar but with LTR adjustments ... */
-
-/* 4. About Section */
-.about-content {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-}
-.stats-grid {
+.social-links a {
+    width: 50px;
+    height: 50px;
+    background: #f0f2f5;
+    border-radius: 50%;
     display: flex;
-    justify-content: space-around;
-    margin-top: 40px;
-    padding: 20px 0;
-    border-top: 1px solid #dee2e6;
-}
-
-/* 5. Skills Section */
-.skills-category {
-    margin-bottom: 40px;
-    padding: 20px;
-    background-color: var(--card-bg);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-light);
-}
-.skills-category h3 {
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
     color: var(--secondary-color);
-    border-bottom: 2px solid var(--primary-color);
-    display: inline-block;
-    padding-bottom: 5px;
-    margin-bottom: 20px;
-    font-size: 1.5em;
+    transition: var(--transition);
 }
-.skills-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: left; /* Align tags to the left */
-}
-.skill-tag i {
-    margin-right: 5px;
+.social-links a:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-5px);
 }
 
-/* 6. Projects & Case Studies */
-.projects-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-}
-.case-study-points i {
-    color: #28a745; 
-    margin-right: 8px; /* Icon spacing on the right */
-}
-.project-links {
-    margin-top: 20px;
-    border-top: 1px solid #f0f0f0;
-    padding-top: 15px;
-    display: flex;
-    gap: 15px;
-    justify-content: flex-start; /* Align links to the left */
-}
-.project-link i { margin-right: 5px; }
-
-
-/* 7. Testimonials Section */
-.testimonials-section {
-    background-color: #f0f3f6;
-}
-.testimonial-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-}
-.quote-icon {
-    position: absolute;
-    top: 20px;
-    left: 20px; /* Icon position adjustment for LTR */
-    font-size: 2em;
-    color: var(--primary-color);
-    opacity: 0.1;
-}
-
-/* 8. Contact & Footer */
-.contact-section {
+/* Footer */
+footer {
+    background: #111;
+    color: #777;
     text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
 }
 
 /* ---------------------------------- */
-/* 9. Media Queries (تحسينات الجوال) */
+/* 5. Mobile Responsiveness (The Upgrade) */
 /* ---------------------------------- */
 @media (max-width: 768px) {
-    /* ---------------------------------- */
-    /* تحسين شريط التنقل (Navbar) */
-    /* ---------------------------------- */
-    .navbar {
-        padding: 10px 5%; 
-    }
-    .navbar nav {
-        /* التعديل: نجعلها في صف واحد وموزعة تماماً على العرض */
-        flex-direction: row; 
-        justify-content: space-between; /* توزيع مثالي للروابط */
-        flex-wrap: wrap; /* تسمح بالنزول لسطر جديد فقط إذا كانت الأسماء طويلة جداً */
-        gap: 5px;
-    }
-    .navbar a {
-        padding: 8px 5px; 
-        flex-grow: 1; /* التعديل: يسمح للروابط بالتمدد لملء المساحة المتاحة بالتساوي */
-        font-size: 0.8em; /* تصغير الخط أكثر قليلاً */
-        text-align: center; /* توسيط النص داخل الرابط */
-    }
-    .navbar a i {
-        display: block; /* جعل الأيقونة تظهر فوق النص في مساحة ضيقة */
-        margin: 0 auto 3px;
+    .hamburger { display: block; z-index: 1001; }
+    
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Hidden by default */
+        height: 100vh;
+        width: 70%;
+        background: #212529;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: 0.5s ease;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.5);
     }
 
-    /* ---------------------------------- */
-    /* تحسين قسم البطل (Hero Section) */
-    /* ---------------------------------- */
-    .hero {
-        padding: 100px 5%;
+    /* When Active (JS adds this class) */
+    .nav-links.nav-active {
+        right: 0;
     }
-    .hero h1 {
-        font-size: 2.5em; /* تصغير الاسم ليناسب معظم الشاشات */
+
+    .nav-links a {
+        font-size: 1.2rem;
+        color: var(--white);
     }
-    .hero h2 {
-        font-size: 1.1em;
-    }
-    .cta-buttons {
-        flex-direction: column; 
-        gap: 15px;
-    }
-    /* ... (بقية تنسيقات الجوال) ... */
+
+    /* Hamburger Animation */
+    .hamburger.toggle .line:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+    .hamburger.toggle .line:nth-child(2) { opacity: 0; }
+    .hamburger.toggle .line:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+
+    .hero-content h1 { font-size: 2.5rem; }
+    .stats-grid { flex-direction: column; gap: 30px; }
 }
