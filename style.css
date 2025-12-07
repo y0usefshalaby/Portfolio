@@ -347,6 +347,18 @@ h2.section-title {
     font-size: 1.2rem;
     color: var(--secondary-color);
     transition: var(--transition);
+    /* Contact */
+.contact-section { text-align: center; background: var(--white); }
+.social-links {
+    margin-top: 30px;
+    /* (إضافة هذا السطر) لزيادة المسافة تحت الأيقونات */
+    margin-bottom: 50px; 
+    
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+/* ... (بقية تنسيق الأيقونات) ... */
 }
 .social-links a:hover {
     background: var(--primary-color);
@@ -354,10 +366,17 @@ h2.section-title {
     transform: translateY(-5px);
 }
 
+/* ---------------------------------- */
 /* Footer */
+/* ---------------------------------- */
 footer {
+    /* (التعديل هنا) زيادة المسافة العلوية لإنشاء فاصل أكبر */
+    margin-top: 50px; 
+    
     background: #111;
-    color: #777;
+    /* (التعديل هنا) تغيير لون النص إلى الأبيض */
+    color: var(--white); 
+    
     text-align: center;
     padding: 20px;
     font-size: 0.9rem;
