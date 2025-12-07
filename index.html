@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Developer Portfolio | [Your Name]</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <nav>
+            <a href="#home"><i class="fas fa-home"></i> Home</a>
+            <a href="#about"><i class="fas fa-user-tie"></i> About</a>
+            <a href="#skills"><i class="fas fa-code"></i> Skills</a>
+            <a href="#projects"><i class="fas fa-folder-open"></i> Projects</a>
+            <a href="#testimonials"><i class="fas fa-star"></i> Testimonials</a>
+            <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <p class="greeting">Hello! I'm</p>
+            <h1>[Your Full Name]</h1>
+            <h2>Software Engineer specializing in [React & Node.js]</h2>
+            <p class="tagline">Transforming complex ideas into robust and efficient software solutions.</p>
+            <div class="cta-buttons">
+                <button id="view-projects-btn" class="main-cta-btn"><i class="fas fa-laptop-code"></i> View Projects</button>
+                <a href="#" class="secondary-cta-btn"><i class="fas fa-download"></i> Download CV</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section about-section">
+        <h2><i class="fas fa-user-tie icon-header"></i> About Me</h2>
+        <div class="about-content">
+            <p>I have over [X] years of experience in the software development lifecycle. My expertise lies in building scalable and performant systems using [Key Technologies]. I am passionate about delivering real value to innovation-focused companies.</p>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>+15</h3>
+                    <p>Completed Projects</p>
+                </div>
+                <div class="stat-item">
+                    <h3>99%</h3>
+                    <p>Client Satisfaction</p>
+                </div>
+                <div class="stat-item">
+                    <h3>5+</h3>
+                    <p>Years of Experience</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section skills-section">
+        <h2><i class="fas fa-code icon-header"></i> Technical Stack</h2>
+        <div class="skills-category">
+            <h3>Frontend Development</h3>
+            <div class="skills-grid">
+                <span class="skill-tag"><i class="fab fa-react"></i> React</span>
+                <span class="skill-tag"><i class="fab fa-js"></i> TypeScript/JavaScript</span>
+                <span class="skill-tag"><i class="fab fa-html5"></i> HTML5/CSS3</span>
+            </div>
+        </div>
+        
+        <div class="skills-category">
+            <h3>Backend & Databases</h3>
+            <div class="skills-grid">
+                <span class="skill-tag"><i class="fab fa-node-js"></i> Node.js (Express)</span>
+                <span class="skill-tag"><i class="fas fa-database"></i> PostgreSQL</span>
+                <span class="skill-tag"><i class="fab fa-python"></i> Python (Django)</span>
+            </div>
+        </div>
+        
+        <div class="skills-category">
+            <h3>Tools & DevOps</h3>
+            <div class="skills-grid">
+                <span class="skill-tag"><i class="fab fa-github"></i> Git/GitHub</span>
+                <span class="skill-tag"><i class="fab fa-aws"></i> AWS/Docker</span>
+                <span class="skill-tag"><i class="fas fa-bug"></i> Testing (Jest)</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section projects-section">
+        <h2><i class="fas fa-folder-open icon-header"></i> Featured Projects & Case Studies</h2>
+        <div class="projects-container">
+            
+            <div class="project-card" data-aos="zoom-in">
+                <h3>Cloud Resource Management System</h3>
+                <p class="tech-used">**Challenge:** Handling 1000 requests per second with minimal latency.</p>
+                <ul class="case-study-points">
+                    <li><i class="fas fa-check-circle"></i> Designed a distributed PostgreSQL database.</li>
+                    <li><i class="fas fa-check-circle"></i> Implemented Docker for consistent deployment environment.</li>
+                    <li><i class="fas fa-check-circle"></i> Reduced latency by 40% using Redis Cache.</li>
+                </ul>
+                <div class="project-links">
+                    <a href="#" target="_blank" class="project-link"><i class="fab fa-github"></i> Code</a>
+                    <a href="#" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                </div>
+            </div>
+
+            <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
+                <h3>Interactive E-Learning Platform</h3>
+                <p class="tech-used">**Challenge:** Creating a fast-loading UI supporting real-time interaction.</p>
+                <ul class="case-study-points">
+                    <li><i class="fas fa-check-circle"></i> Used Redux for complex frontend state management.</li>
+                    <li><i class="fas fa-check-circle"></i> Achieved 85% code coverage with Jest testing framework.</li>
+                    <li><i class="fas fa-check-circle"></i> Optimized interface performance using lazy loading.</li>
+                </ul>
+                <div class="project-links">
+                    <a href="#" target="_blank" class="project-link"><i class="fab fa-github"></i> Code</a>
+                    <a href="#" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+    <section id="testimonials" class="section testimonials-section">
+        <h2><i class="fas fa-star icon-header"></i> What Clients & Colleagues Say</h2>
+        <div class="testimonial-grid">
+            
+            <div class="testimonial-card">
+                <i class="fas fa-quote-right quote-icon"></i>
+                <p>"[Your Name]'s work on our project was exceptional. He exceeded expectations in code quality and adherence to deadlines."</p>
+                <div class="client-info">
+                    <h4>Ahmed Mohammed</h4>
+                    <span>CTO, Innovation Solutions Inc.</span>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <i class="fas fa-quote-right quote-icon"></i>
+                <p>"His problem-solving skills are profound, and he helped us simplify our deployment pipeline incredibly."</p>
+                <div class="client-info">
+                    <h4>Fatima Ali</h4>
+                    <span>Senior Software Engineer</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+        <h2><i class="fas fa-envelope icon-header"></i> Let's Work Together!</h2>
+        <p>If you are looking for a developer passionate about turning technical challenges into practical solutions, get in touch.</p>
+        <div class="contact-details">
+            <p><i class="fas fa-phone-alt"></i> Phone: [Your Number]</p>
+            <p><i class="fas fa-at"></i> Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+        </div>
+        <div class="social-links">
+            <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" target="_blank" title="Stack Overflow"><i class="fab fa-stack-overflow"></i></a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 [Your Name]. Built with passion.</p>
+    </footer>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 800 });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
