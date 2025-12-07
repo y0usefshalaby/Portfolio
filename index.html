@@ -1,184 +1,29 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Portfolio • Yousef Shalaby </title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-    <header class="navbar">
-        <nav>
-            <a href="#home"><i class="fas fa-home"></i> Home</a>
-            <a href="#about"><i class="fas fa-user-tie"></i> About</a>
-            <a href="#skills"><i class="fas fa-code"></i> Skills</a>
-            <!--a href="#projects"><i class="fas fa-folder-open"></i> Projects</a-->
-            <!--a href="#testimonials"><i class="fas fa-star"></i> Testimonials</a-->
-            <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
-        </nav>
+<header class="navbar">
+        <div class="container nav-container">
+            <div class="logo">Yousef<span>.</span></div>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <nav class="nav-links">
+                <a href="#home"><i class="fas fa-home"></i> Home</a>
+                <a href="#about"><i class="fas fa-user-tie"></i> About</a>
+                <a href="#skills"><i class="fas fa-code"></i> Skills</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+            </nav>
+        </div>
     </header>
 
     <section id="home" class="hero">
         <div class="hero-content" data-aos="fade-up">
             <p class="greeting">Hello! I'm</p>
             <h1>Yousef Shalaby</h1>
-            <h2>Cybersecurity • Security systems technician</h2>
+            <h2><span class="typewriter-text"></span><span class="cursor">|</span></h2>
             <p class="tagline">Building Secure Solutions, Crafting Clean & Safe Code.</p>
             <div class="cta-buttons">
                 <button id="view-projects-btn" class="main-cta-btn"><i class="fas fa-laptop-code"></i> View Projects </button>
-                
                 <a href="CV/Yousef Shalaby CV.pdf" class="secondary-cta-btn" target="_blank"><i class="fas fa-download"></i> Download CV</a>
             </div>
         </div>  
     </section>
-
-    <section id="about" class="section about-section">
-        <h2><i class="fas fa-user-tie icon-header"></i> About Me</h2>
-        <div class="about-content">
-            <p>My current field of study is Information Systems, and I graduated from high school with a specialization in Security Systems. I am working on developing my skills to advance in Studying the field of networking to the field of cybersecurity as it is my favorite field of dealing with technology In addition to my hobbies and planning to create content on YouTube.</p>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3>0</h3>
-                    <p>Completed Projects</p>
-                </div>
-                <div class="stat-item">
-                    <h3>0%</h3>
-                    <p>Client Satisfaction</p>
-                </div>
-                <div class="stat-item">
-                    <h3>0</h3>
-                    <p>Years of Experience</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="section skills-section">
-        <h2><i class="fas fa-code icon-header"></i> Technical Stack</h2>
-        <div class="skills-category">
-            <h3>Development & Core</h3>
-            <div class="skills-grid">
-                <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
-                <span class="skill-tag"><i class="fab fa-js"></i> TypeScript/JavaScript</span>
-                <span class="skill-tag"><i class="fab fa-html5"></i> HTML5/CSS3</span>
-                <span class="skill-tag"><i class="fab fa-git"></i> Git</span>
-            </div>
-        </div>
-        
-        <!--div class="skills-category">
-            <h3>Backend & Databases</h3>
-            <div class="skills-grid">
-                <span class="skill-tag"><i class="fab fa-node-js"></i> Node.js (Express)</span>
-                <span class="skill-tag"><i class="fas fa-database"></i> PostgreSQL</span>
-                <span class="skill-tag"><i class="fab fa-python"></i> Python (Django)</span>
-            </div>
-        </div-->
-        
-        <!--div class="skills-category">
-            <h3>Tools & DevOps</h3>
-            <div class="skills-grid">
-                <span class="skill-tag"><i class="fab fa-github"></i> Git/GitHub</span>
-                <span class="skill-tag"><i class="fab fa-aws"></i> AWS/Docker</span>
-                <span class="skill-tag"><i class="fas fa-bug"></i> Testing (Jest)</span>
-            </div>
-        </div-->
-
-        <div class="skills-category">
-            <h3>Security & OS</h3>
-            <div class="skills-grid">
-                <span class="skill-tag"><i class="fab fa-windows"></i> Windows</span>
-                <span class="skill-tag"><i class="fab fa-linux"></i> Liunx</span>
-                <!--span class="skill-tag"><i class="fas fa-bug"></i> Testing (Jest)</span-->
-            </div>
-        </div>
-    </section>
-
-    <!--section id="projects" class="section projects-section">
-        <h2><i class="fas fa-folder-open icon-header"></i> Featured Projects & Case Studies</h2>
-        <div class="projects-container">
-            
-            <div class="project-card" data-aos="zoom-in">
-                <h3>P1</h3>
-                <p class="tech-used">**Challenge:** Handling 1000 requests per second with minimal latency.</p>
-                <ul class="case-study-points">
-                    <li><i class="fas fa-check-circle"></i> Designed a distributed PostgreSQL database.</li>
-                    <li><i class="fas fa-check-circle"></i> Implemented Docker for consistent deployment environment.</li>
-                    <li><i class="fas fa-check-circle"></i> Reduced latency by 40% using Redis Cache.</li>
-                </ul>
-                <div class="project-links">
-                    <a href="#" target="_blank" class="project-link"><i class="fab fa-github"></i> Code</a>
-                    <a href="#" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                </div>
-            </div-->
-
-            <!--div class="project-card" data-aos="zoom-in" data-aos-delay="100">
-                <h3>P2</h3>
-                <p class="tech-used">**Challenge:** Creating a fast-loading UI supporting real-time interaction.</p>
-                <ul class="case-study-points">
-                    <li><i class="fas fa-check-circle"></i> Used Redux for complex frontend state management.</li>
-                    <li><i class="fas fa-check-circle"></i> Achieved 85% code coverage with Jest testing framework.</li>
-                    <li><i class="fas fa-check-circle"></i> Optimized interface performance using lazy loading.</li>
-                </ul>
-                <div class="project-links">
-                    <a href="#" target="_blank" class="project-link"><i class="fab fa-github"></i> Code</a>
-                    <a href="#" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                </div>
-            </div>
-            
-        </div>
-    </section-->
-    
-    <!--section id="testimonials" class="section testimonials-section">
-        <h2><i class="fas fa-star icon-header"></i> What Clients & Colleagues Say</h2>
-        <div class="testimonial-grid">
-            
-            <div class="testimonial-card">
-                <i class="fas fa-quote-right quote-icon"></i>
-                <p>"[Your Name]'s work on our project was exceptional. He exceeded expectations in code quality and adherence to deadlines."</p>
-                <div class="client-info">
-                    <h4>Ahmed Mohammed</h4>
-                    <span>CTO, Innovation Solutions Inc.</span>
-                </div>
-            </div>
-
-            <div class="testimonial-card">
-                <i class="fas fa-quote-right quote-icon"></i>
-                <p>"His problem-solving skills are profound, and he helped us simplify our deployment pipeline incredibly."</p>
-                <div class="client-info">
-                    <h4>Fatima Ali</h4>
-                    <span>Senior Software Engineer</span>
-                </div>
-            </div>
-        </div>
-    </section-->
-
-    <section id="contact" class="section contact-section">
-        <h2><i class="fas fa-envelope icon-header"></i> Let's Work Together!</h2>
-        <p>If you are looking for a Security systems technician about turning technical challenges into practical solutions, get in touch.</p>
-        <div class="contact-details">
-            <!--p><i class="fas fa-phone-alt"></i> Phone: [Your Number]</p-->
-            <p><i class="fas fa-at"></i> Email: <a href="mailto:your.email@example.com">contactyousefshalaby@gmail.com
-</a></p>
-       <div class="social-links">
-            <a href="https://www.linkedin.com/in/yousef-shalaby-a6a79a254" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://github.com/y0usefshalaby" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://www.youtube.com/@0BLACK-ROOT" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.whatsapp.com/channel/0029VbBdVcO002SzKjlmI42W" target="_blank" title="Whatsapp Channel"><i class="fab fa-whatsapp"></i></a>
-        </div>
-
-    <footer>
-        <p> Yousef Shlabay. Thank you for browsing. 
-            &copy; 2026
-        </p>
-    </footer>
-
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init({ duration: 800 });
-    </script>
-    <script src="script.js"></script>
-</body>
-</html>
