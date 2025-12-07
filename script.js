@@ -1,34 +1,49 @@
 document.addEventListener('DOMContentLoaded', function() {
+
+    /* ---------------------------------- */
+    /* 1. Navbar Functionality (Hamburger Menu & Scroll Effect) */
+    /* ---------------------------------- */
     
-    // 1. تعريف العناصر
+    // تعريف العناصر
     const hamburger = document.querySelector(".hamburger");
     const navMenu = document.querySelector(".nav-menu");
     const navbar = document.querySelector(".navbar");
+    // يجب تحديد كل الروابط النشطة في القائمة
+    const navLinks = document.querySelectorAll(".nav-menu a"); 
+    
+    // 1. تفعيل زر القائمة (Hamburger Menu)
+    if (hamburger && navMenu) {
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+            // تحسين: منع التمرير في الخلفية عند فتح القائمة (لمنع ظهور المحتوى بالخلف)
+            document.body.classList.toggle('no-scroll'); 
+        });
+    }
 
-    // 2. فتح وإغلاق القائمة عند الضغط
-    hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("active");
-        navMenu.classList.toggle("active");
-    });
-
-    // 3. إغلاق القائمة عند اختيار رابط
-    document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
-        hamburger.classList.remove("active");
-        navMenu.classList.remove("active");
+    // 2. إغلاق القائمة عند الضغط على أي رابط
+    navLinks.forEach(link => link.addEventListener("click", () => {
+        if (hamburger && navMenu) {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+            document.body.classList.remove('no-scroll');
+        }
     }));
 
-    // 4. تغيير لون الخلفية عند التمرير (Sticky Effect)
+    // 3. تغيير لون الخلفية عند التمرير (Sticky Effect)
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
+        if (navbar) {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
         }
     });
-});
-    // -------------------------
-    // 3. Typewriter Effect
-    // -------------------------
+
+    /* ---------------------------------- */
+    /* 2. Typewriter Effect */
+    /* ---------------------------------- */
     const textElement = document.querySelector('.typewriter-text');
     const texts = ["Cybersecurity Specialist", "Security Systems Technician", "Tech Enthusiast"];
     let count = 0;
@@ -36,42 +51,66 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentText = '';
     let letter = '';
 
-    (function type() {
+    function type() {
+        if (!textElement) return; // توقف إذا لم يتم العثور على العنصر
+
         if (count === texts.length) {
             count = 0;
         }
         currentText = texts[count];
-        letter = currentText.slice(0, ++index);
-
-        if(textElement) {
+        // التأكد من عدم تجاوز طول النص
+        if (index < currentText.length) {
+            letter = currentText.slice(0, ++index);
             textElement.textContent = letter;
-        }
-
-        if (letter.length === currentText.length) {
-            count++;
-            index = 0;
-            setTimeout(type, 2000); // Wait before typing next word
+            setTimeout(type, 100); // سرعة الكتابة
         } else {
-            setTimeout(type, 100); // Typing speed
+            // انتظار ثم البدء في مسح الكلمة
+            setTimeout(erase, 2000); // انتظار ثانيتين
         }
-    }());
+    }
 
-    // -------------------------
-    // 4. Active Link Highlighter (IntersectionObserver)
-    // -------------------------
-    const sections = document.querySelectorAll('section');
-    const navItems = document.querySelectorAll('.nav-links a');
+    function erase() {
+        if (!textElement) return;
+        
+        if (index > 0) {
+            letter = currentText.slice(0, --index);
+            textElement.textContent = letter;
+            setTimeout(erase, 50); // سرعة المسح
+        } else {
+            count++;
+            setTimeout(type, 500); // انتظار نصف ثانية قبل كتابة الكلمة التالية
+        }
+    }
+    
+    // تشغيل الدالة
+    if (textElement) {
+        type();
+    }
+
+
+    /* ---------------------------------- */
+    /* 3. Active Link Highlighter (IntersectionObserver) */
+    /* ---------------------------------- */
+    const sections = document.querySelectorAll('section[id]'); // تحديد الأقسام التي لديها ID
+    // استخدام نفس الـ navLinks التي تم تعريفها في الأعلى
+    // const navItems = document.querySelectorAll('.nav-menu a'); 
 
     const observerOptions = {
-        threshold: 0.3
+        threshold: 0.3 // عندما يظهر 30% من القسم
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                navItems.forEach(link => {
+                navLinks.forEach(link => {
+                    // إزالة 'active' من كل الروابط
                     link.classList.remove('active');
-                    if (link.getAttribute('href').substring(1) === entry.target.id) {
+                    
+                    // مقارنة ID القسم الظاهر مع رابط الـ href
+                    const sectionId = entry.target.id;
+                    const linkHref = link.getAttribute('href').substring(1);
+                    
+                    if (linkHref === sectionId) {
                         link.classList.add('active');
                     }
                 });
@@ -83,9 +122,9 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(section);
     });
 
-    // -------------------------
-    // 5. Initialize AOS (if used)
-    // -------------------------
+    /* ---------------------------------- */
+    /* 4. Initialize AOS (if used) */
+    /* ---------------------------------- */
     if (typeof AOS !== 'undefined') {
         AOS.init({
             duration: 1000,
@@ -93,3 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// ملاحظة مهمة للـ CSS:
+// تأكد من إضافة هذا الكلاس البسيط في ملف style.css لمنع تمرير الخلفية عند فتح القائمة:
+// .no-scroll { overflow: hidden; }
