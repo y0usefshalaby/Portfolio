@@ -1,31 +1,23 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    // -------------------------
-    // 1. Mobile Menu Toggle
-    // -------------------------
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const navLinksItems = document.querySelectorAll('.nav-links a');
+    // 1. تعريف العناصر
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".nav-menu");
+    const navbar = document.querySelector(".navbar");
 
-    hamburger.addEventListener('click', () => {
-        // Toggle Nav
-        navLinks.classList.toggle('nav-active');
-        // Burger Animation
-        hamburger.classList.toggle('toggle');
+    // 2. فتح وإغلاق القائمة عند الضغط
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        navMenu.classList.toggle("active");
     });
 
-    // Close menu when a link is clicked
-    navLinksItems.forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('nav-active');
-            hamburger.classList.remove('toggle');
-        });
-    });
+    // 3. إغلاق القائمة عند اختيار رابط
+    document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
+        hamburger.classList.remove("active");
+        navMenu.classList.remove("active");
+    }));
 
-    // -------------------------
-    // 2. Sticky Navbar Effect
-    // -------------------------
-    const navbar = document.querySelector('.navbar');
+    // 4. تغيير لون الخلفية عند التمرير (Sticky Effect)
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
@@ -33,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
             navbar.classList.remove('scrolled');
         }
     });
-
+});
     // -------------------------
     // 3. Typewriter Effect
     // -------------------------
