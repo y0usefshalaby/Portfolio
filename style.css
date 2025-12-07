@@ -55,7 +55,7 @@ h2::after {
 }
 
 /* ---------------------------------- */
-/* 2. Navigation Bar */
+/* 2. Navigation Bar (المُعدَّل) */
 /* ---------------------------------- */
 .navbar {
     background-color: var(--secondary-color);
@@ -66,13 +66,18 @@ h2::after {
     box-shadow: var(--shadow-light);
 }
 .navbar nav {
+    /* التعديل: نستخدم التوزيع المتساوي */
     display: flex;
-    justify-content: flex-start; /* Align content to the left */
+    justify-content: space-around; /* توزيع الروابط بالتساوي على الشاشات الكبيرة */
+    flex-wrap: nowrap; /* منع النزول لسطر جديد على الشاشات الكبيرة */
+    gap: 10px;
+    max-width: 1000px; /* لتقييد العرض في الوسط */
+    margin: 0 auto;
 }
 .navbar a {
     color: white;
     padding: 10px 18px;
-    margin-right: 15px; /* Spacing on the right */
+    margin: 0; /* إزالة المسافات الجانبية التي قد تعيق التوزيع */
     font-weight: 500;
     transition: background-color 0.3s, color 0.3s;
     border-radius: 5px;
@@ -212,16 +217,49 @@ h2::after {
     text-align: center;
 }
 
-/* 9. Media Queries */
+/* ---------------------------------- */
+/* 9. Media Queries (تحسينات الجوال) */
+/* ---------------------------------- */
 @media (max-width: 768px) {
+    /* ---------------------------------- */
+    /* تحسين شريط التنقل (Navbar) */
+    /* ---------------------------------- */
+    .navbar {
+        padding: 10px 5%; 
+    }
     .navbar nav {
-        flex-direction: column;
-        align-items: center;
+        /* التعديل: نجعلها في صف واحد وموزعة تماماً على العرض */
+        flex-direction: row; 
+        justify-content: space-between; /* توزيع مثالي للروابط */
+        flex-wrap: wrap; /* تسمح بالنزول لسطر جديد فقط إذا كانت الأسماء طويلة جداً */
+        gap: 5px;
     }
     .navbar a {
-        margin: 5px 0;
+        padding: 8px 5px; 
+        flex-grow: 1; /* التعديل: يسمح للروابط بالتمدد لملء المساحة المتاحة بالتساوي */
+        font-size: 0.8em; /* تصغير الخط أكثر قليلاً */
+        text-align: center; /* توسيط النص داخل الرابط */
     }
-    .project-links {
-        justify-content: center;
+    .navbar a i {
+        display: block; /* جعل الأيقونة تظهر فوق النص في مساحة ضيقة */
+        margin: 0 auto 3px;
     }
+
+    /* ---------------------------------- */
+    /* تحسين قسم البطل (Hero Section) */
+    /* ---------------------------------- */
+    .hero {
+        padding: 100px 5%;
+    }
+    .hero h1 {
+        font-size: 2.5em; /* تصغير الاسم ليناسب معظم الشاشات */
+    }
+    .hero h2 {
+        font-size: 1.1em;
+    }
+    .cta-buttons {
+        flex-direction: column; 
+        gap: 15px;
+    }
+    /* ... (بقية تنسيقات الجوال) ... */
 }
