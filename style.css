@@ -36,7 +36,9 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
-    overflow-x: hidden;
+    /* ************* التعديل الأهم لحل مشكلة الزيادة الجانبية ************* */
+    overflow-x: hidden; 
+    /* ******************************************************************* */
 }
 
 body.no-scroll { overflow: hidden; } 
@@ -198,12 +200,26 @@ ul { list-style: none; }
         padding: 12px 25px; 
         font-size: 0.9rem;
     }
+    
+    /* 3. العناوين والأقسام */
+    h2.section-title { 
+        font-size: 2rem; 
+        margin-bottom: 40px; 
+    }
+    /* ************* تقليل الـ Padding الجانبي في الموبايل ************* */
+    .section { 
+        padding: 80px 4%; /* تقليل الـ padding الجانبي لـ 4% بدلاً من 5% لزيادة المساحة المتاحة */
+    }
+    .nav-container {
+         padding: 0 4%; /* ضمان تطابق الـ padding في الـ navbar */
+    }
+    /* ******************************************************************* */
 
-    /* 3. قسم About Me (حل مشكلة عدم الترتيب والتحاذي) */
+    /* 4. قسم About Me */
     .about-container { 
         flex-direction: column; 
         align-items: center; 
-        text-align: center; /* توسيط جميع المحتويات */
+        text-align: center; 
         gap: 20px;
     }
     .about-text { 
@@ -211,68 +227,83 @@ ul { list-style: none; }
         padding-top: 0;
         text-align: center;
     }
-    .about-text p { text-align: center; } /* توسيط النص داخل الفقرات */
+    .about-text p { 
+        /* توسيط النص داخل الفقرات وإزالة التحجيم غير المرغوب فيه */
+        text-align: center; 
+        padding: 0 5px; 
+    } 
     .about-image { order: 1; margin-bottom: 20px; }
     .profile-image { 
         width: 180px; 
         height: 180px;
         border-width: 4px;
     }
-    /* جعل شبكة الإحصائيات عمودية وموسّطة */
     .stats-grid { 
         flex-direction: column; 
         gap: 20px; 
         padding: 20px;
         margin-top: 30px;
+        /* ************* التعديل للتأكد من عدم الخروج عن الإطار ************* */
+        width: 95%; 
+        max-width: 350px;
+        margin-left: auto;
+        margin-right: auto;
     }
     .stat-item h3 { font-size: 2rem; }
     
-    /* 4. قسم Education Timeline (حل مشكلة التايم لاين) */
+    /* 5. قسم Education Timeline */
     .timeline-container { 
-        /* إزالة الخط الأزرق في الموبايل */
-        padding-left: 0; 
-        /* إضافة خط وهمي خفيف لتنظيم العناصر */
-        border-left: 3px solid #ddd;
-        padding-left: 20px; /* لإنشاء مسافة للنقاط على اليسار */
+        /* الخط الأزرق الوهمي - جعله أغمق قليلاً ليكون مرئياً */
+        border-left: 3px solid var(--primary-dark);
+        padding-left: 20px; 
+        max-width: 95%; /* تحديد عرض أقصى للحاوية */
+    }
+    .timeline-container::before {
+        content: none; /* إلغاء الخط الأزرق الكبير في شاشات الموبايل */
     }
     .timeline-item {
-        /* جعل العناصر عمودية ومحاذاة لليسار */
+        /* جعل العناصر أفقية لكن بترتيب معكوس لتكون النقطة هي الأقرب للخط */
         flex-direction: row; 
         align-items: flex-start;
-        gap: 20px; /* تقليل المسافة بين اللوجو والبطاقة */
+        gap: 15px; /* تقليل المسافة بين اللوجو والبطاقة */
         padding-left: 0;
         margin-bottom: 50px;
     }
-    /* وضع النقطة على الخط الأزرق الوهمي */
+    
+    /* النقطة - تثبيتها بدقة على الخط */
     .timeline-dot {
-        left: -10px; /* تعويض المسافة التي أضيفت في timeline-container */
+        left: -10px; 
         top: 0;
-        transform: none; /* إلغاء التوسيط القديم */
+        transform: none; 
     }
     
-    /* وضع اللوجو على اليمين والبطاقة على اليسار في صف واحد على الموبايل */
+    /* اللوجو - يجب أن يكون داخل البطاقة أو بجوارها بشكل منطقي */
     .institution-logo-container {
-        order: 2; /* اللوجو على اليمين */
-        margin-top: 5px; /* رفع اللوجو قليلاً */
-        width: 80px; /* تصغير حجم اللوجو */
+        /* ************* نقل اللوجو ليكون داخل البطاقة على الموبايل ************* */
+        display: none; 
+        /* أو يمكن إبقائه بجوار البطاقة وتصغيره بشدة (كما في الكود السابق) */
+        /* width: 60px; margin-top: 5px; order: 2; */
     }
-    .institution-logo {
-        width: 80px; 
-        height: 80px;
-    }
+    
+    /* البطاقة - تصحيح مكانها وعرضها */
     .timeline-content {
         order: 1; /* البطاقة على اليسار */
-        max-width: none; 
-        padding: 25px; /* تقليل التباعد الداخلي للبطاقة */
+        max-width: 100%; /* العرض الأقصى يصبح عرض الشاشة المتاح */
+        padding: 20px; /* تقليل التباعد الداخلي */
+        text-align: left; /* الحفاظ على محاذاة اليسار للقراءة */
+        width: 100%; 
+        margin-top: 0;
     }
-    
-    /* 5. العناوين والأقسام */
-    h2.section-title { font-size: 2rem; margin-bottom: 40px; }
-    .section { padding: 80px 5%; }
+    /* ************* إظهار اللوجو داخل البطاقة (أو وضع أيقونة بديلة) ************* */
+    .timeline-content .timeline-institution {
+        /* يمكنك إضافة اللوجو كصورة صغيرة داخل البطاقة هنا إذا أردت */
+        margin-top: 10px;
+    }
+
 
     /* 6. قسم Certificates */
     .certificate-card {
-        max-width: 100%; 
+        max-width: 90%; 
         margin: 0 auto;
     }
     .certificates-grid {
@@ -281,7 +312,11 @@ ul { list-style: none; }
     }
     
     /* 7. قسم Skills */
-    .skills-category { padding: 20px; }
+    .skills-category { 
+        padding: 20px; 
+        /* ************* التعديل لضمان عدم الخروج عن الإطار ************* */
+        width: 100%;
+    }
     .skill-tag { 
         padding: 8px 15px; 
         font-size: 0.9rem;
@@ -289,7 +324,12 @@ ul { list-style: none; }
     
     /* 8. Contact Section */
     .contact-details p { font-size: 1rem; }
-    .social-links a { width: 45px; height: 45px; font-size: 1.2rem; }
+    .social-links { gap: 15px; } /* تقليل التباعد بين الأيقونات */
+    .social-links a { 
+        width: 40px; 
+        height: 40px; 
+        font-size: 1.1rem; 
+    }
 }
 
 /* ---------------------------------- */
@@ -568,7 +608,6 @@ h2.section-title::after {
     max-width: 1000px;
     margin: 0 auto;
     position: relative;
-    /* الخط الزمني في وضع الديسكتوب */
     padding-left: 30px; 
 }
 /* الخط الأزرق العمودي للـ Timeline على الديسكتوب */
@@ -698,7 +737,13 @@ h2.section-title::after {
 /* ---------------------------------- */
 /* 11. Contact Section */
 /* ---------------------------------- */
-.contact-section { text-align: center; background: #f8f8f8; padding-bottom: 50px; }
+.contact-section { 
+    text-align: center; 
+    background: #f8f8f8; 
+    padding-bottom: 50px; 
+    /* ************* التعديل الأهم لحل مشكلة الزيادة الجانبية ************* */
+    overflow-x: hidden; 
+}
 .contact-section p {
     max-width: 600px;
     margin: 20px auto 40px;
@@ -765,43 +810,103 @@ footer {
 }
 
 /* ---------------------------------- */
-/* 14. Tablet Optimization (max-width: 768px) */
+/* 14. Mobile Optimization (max-width: 768px) */
 /* ---------------------------------- */
-@media (max-width: 768px) {
-    /* 1. تقليل حجم النص والعناوين العامة للتابلت */
-    h2.section-title { font-size: 2.5rem; margin-bottom: 50px; }
-    .hero-content h1 { font-size: 3.5rem; }
+@media (max-width: 768px) { 
     
-    /* 2. تحسين تصميم Timeline للتابلت (الحفاظ على الخط ولكن بتصغير العناصر) */
-    .timeline-container::before { left: 15px; } /* تحريك الخط لليسار قليلاً */
+    /* 1. القائمة العلوية */
+    .nav-container { padding: 0 4%; } 
     
+    /* 2. العناوين والأقسام */
+    h2.section-title { font-size: 2.2rem; margin-bottom: 30px; }
+    .section { 
+        /* ************* تقليل الـ Padding الجانبي لجميع الأقسام ************* */
+        padding: 60px 4%; 
+    }
+    
+    /* 3. قسم About Me */
+    .about-text p { 
+        text-align: justify; /* محاذاة النص على الجانبين قد تبدو أفضل في الموبايل */
+        padding: 0; 
+        font-size: 1rem;
+    } 
+    .about-text h3 { font-size: 1.5rem; margin-bottom: 15px; }
+
+    /* Stats Grid - تم تصحيح العرض */
+    .stats-grid { 
+        flex-direction: column; 
+        gap: 15px; 
+        padding: 15px;
+        margin-top: 25px;
+        width: 100%; /* العرض الكامل داخل الـ padding المتاح */
+        box-shadow: none; /* تخفيف الظل */
+        border: none;
+        background: transparent;
+    }
+    .stats-grid:hover { transform: none; box-shadow: none; }
+    .stat-item h3 { font-size: 2.5rem; }
+    .stat-item p { font-size: 0.9rem; }
+    
+    /* 4. قسم Education Timeline */
+    .timeline-container { 
+        /* تحديد عرض الخط الأزرق الوهمي وتثبيته في اليسار */
+        border-left: 3px solid var(--primary-dark);
+        padding-left: 20px; 
+        max-width: 100%; 
+    }
     .timeline-item {
-        /* تقليل المسافة الأفقية بين العناصر */
-        gap: 40px; 
+        gap: 15px; 
+        margin-bottom: 40px;
+    }
+    
+    /* إلغاء ظهور اللوجو الكبير في شاشات الموبايل */
+    .institution-logo-container {
+        display: none; 
     }
     
     .timeline-dot {
-        left: 5px; /* تثبيت النقطة على الخط الجديد */
-        width: 16px;
-        height: 16px;
+        left: 5px; /* تثبيتها على الخط الجديد بمسافة 5px عن اليسار */
+        width: 14px;
+        height: 14px;
+        border-width: 3px;
     }
     
     .timeline-content {
-        padding: 30px; /* تباعد داخلي متوسط */
+        padding: 15px; 
+        max-width: 100%; 
+        width: 100%; 
+    }
+    .timeline-content h3 { font-size: 1.2rem; }
+    .timeline-content p { font-size: 0.9rem; }
+
+    /* 5. قسم Certificates */
+    .certificate-card {
+        max-width: 100%; 
+        padding: 30px 15px;
     }
     
-    .institution-logo-container {
-        /* تصغير اللوجو قليلاً */
-        width: 100px;
-        margin-top: 20px;
-    }
-    .institution-logo {
-        width: 100px;
-        height: 100px;
+    /* 6. قسم Contact */
+    .contact-details p { font-size: 1rem; }
+    .social-links a { 
+        width: 40px; 
+        height: 40px; 
+        font-size: 1.1rem; 
     }
 
-    /* 3. قسم About: جعل الـ Stats أكثر ضيقًا */
-    .stats-grid { 
-        padding: 25px 30px;
+}
+/* ---------------------------------- */
+/* 15. Phone Optimization (max-width: 480px) */
+/* ---------------------------------- */
+@media (max-width: 480px) {
+    .hero-content h1 { font-size: 2.5rem; }
+    .hero h2 { font-size: 1.2rem; }
+    
+    /* تصغير الأزرار أكثر */
+    .main-cta-btn, .secondary-cta-btn {
+        padding: 10px 20px; 
+        font-size: 0.85rem;
     }
+    
+    /* زيادة الـ padding للقائمة المنبثقة لملء الشاشة بشكل أفضل */
+    .nav-menu { width: 85%; }
 }
