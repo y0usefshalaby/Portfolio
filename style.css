@@ -198,23 +198,30 @@ ul { list-style: none; }
 
 
     /* About Section Mobile Fixes */
-    .about-container { flex-direction: column; align-items: center; text-align: center; }
+    .about-container { 
+        flex-direction: column; 
+        align-items: center; 
+        /* تم تغيير المحاذاة للنص ليتوسط الشاشة في الموبايل */
+        text-align: center; 
+    }
     .about-text { order: 2; }
     .about-image { order: 1; margin-bottom: 30px; }
     .hero-content h1 { font-size: 2.5rem; }
-    .stats-grid { flex-direction: column; gap: 30px; }
-    
-    /* Timeline Mobile - تم الإبقاء على التوسيط في الموبايل */
-    .timeline-container { padding-left: 0; }
-    
-    /* تم تجميع النقاط والدائرة في الموبايل */
-    .timeline-dot {
-        left: 50%;
-        transform: translateX(-50%);
+    .stats-grid { 
+        flex-direction: column; 
+        gap: 30px; 
     }
+    
+    /* Timeline Mobile Fixes - تم تصفيرها لتناسب العرض العمودي والمُوسَّط */
+    .timeline-container { padding-left: 0; }
     .timeline-item {
         padding-left: 0;
         text-align: center;
+    }
+    .timeline-dot {
+        /* لتوسيط النقطة في الموبايل */
+        left: 50%;
+        transform: translateX(-50%);
     }
     .timeline-content {
         margin-top: 20px;
@@ -399,6 +406,8 @@ h2.section-title::after {
     color: var(--text-color);
     line-height: 1.8;
     font-size: 1.05rem; 
+    /* التأكد من محاذاة النص لليسار على الديسكتوب */
+    text-align: left; 
 }
 
 .about-text p strong {
@@ -500,9 +509,10 @@ h2.section-title::after {
     max-width: 900px;
     margin: 0 auto;
     position: relative;
-    /* الحفاظ على الـ padding-left لتوفير مساحة للدوائر */
+    /* الحفاظ على الـ padding-left لتوفير مساحة للدوائر على اليسار */
     padding-left: 30px; 
 }
+
 /* ❌ تم حذف الكود الخاص بـ .timeline-container::before لإزالة الخط الرأسي */
 
 .timeline-item {
@@ -517,7 +527,7 @@ h2.section-title::after {
     background: var(--primary-color);
     border-radius: 50%;
     position: absolute;
-    /* الحفاظ على left: -10px لتظهر الدائرة على اليسار */
+    /* الحفاظ على left: -10px لتظهر الدائرة على اليسار كنقطة زمنية */
     left: -10px; 
     top: 0;
     border: 4px solid var(--white);
