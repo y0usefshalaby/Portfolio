@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     /* Typewriter Effect */
     /* ---------------------------------- */
     const textElement = document.querySelector('.typewriter-text');
-    const texts = ["Cybersecurity Specialist", "Security Systems Technician"];
+    const texts = ["Cybersecurity", "Security Systems Technician"];
     let count = 0;
     let index = 0;
     let currentText = '';
