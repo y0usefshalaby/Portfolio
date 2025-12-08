@@ -491,27 +491,50 @@ h2.section-title::after {
     text-decoration: underline;
 }
 
+/* ---------------------------------- */
+/* Social Icons Styling */
+/* ---------------------------------- */
+
+/* ---------------------------------- */
+/* Social Icons Styling - Smooth Look */
+/* ---------------------------------- */
+
 .social-links {
     margin-top: 40px;
     margin-bottom: 0; 
     display: flex;
     justify-content: center;
-    gap: 25px;
+    gap: 25px; /* مسافة أكبر */
 }
+
+/* التعديل هنا: نستخدم .social-links a لأن هذا هو العنصر الحامل للأيقونة والدائرة */
 .social-links a {
     width: 55px;
     height: 55px;
     background: var(--white);
     border-radius: 50%;
+    
+    /* زيادة الظل لجعله أكثر نعومة وبروزاً */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); 
+    
     border: 1px solid #ddd;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 1.4rem;
     color: var(--secondary-color);
+    transition: var(--transition-smooth); /* استخدام الانتقال السلس */
 }
+
 .social-links a:hover {
     background: var(--primary-color);
     color: var(--white);
-    transform: translateY(-5px) rotate(5deg);
+    
+    /* إضافة حركة عند المرور عليها */
+    transform: translateY(-8px) rotate(2deg); 
+    
+    /* ظل أقوى عند المرور */
+    box-shadow: 0 15px 30px rgba(0, 123, 255, 0.4); 
 }
 
 /* ---------------------------------- */
