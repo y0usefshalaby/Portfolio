@@ -1,3 +1,6 @@
+/* ---------------------------------- */
+/* 1. Variables and Reset */
+/* ---------------------------------- */
 :root {
     --primary-color: #007bff;
     --primary-dark: #0056b3;
@@ -22,6 +25,7 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Custom Scrollbar */
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: #f1f1f1; }
 ::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 5px; }
@@ -41,7 +45,7 @@ a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
 /* ---------------------------------- */
-/* Navigation Bar */
+/* 2. Navigation Bar (Desktop & Shared) */
 /* ---------------------------------- */
 .navbar {
     position: fixed;
@@ -51,13 +55,13 @@ ul { list-style: none; }
     z-index: 1000;
     transition: var(--transition-smooth);
     background: transparent;
-    padding: 15px 0;
+    padding: 20px 0; 
 }
 
 .navbar.scrolled {
     background: rgba(18, 18, 18, 0.98); 
     box-shadow: var(--shadow-dark);
-    padding: 10px 0;
+    padding: 15px 0;
     backdrop-filter: blur(10px);
 }
 
@@ -65,31 +69,27 @@ ul { list-style: none; }
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 5%;
-    display: flex;
-    justify-content: space-between;
+    display: flex; 
+    justify-content: space-between; 
     align-items: center;
 }
 
-/* 1. اللوجو */
-/* ---------------------------------- */
-/* 1. Logo Correction (الشعار) */
-/* ---------------------------------- */
-/* ---------------------------------- */
-/* Navigation Bar - الشعار (Logo) */
-/* ---------------------------------- */
+.nav-menu {
+    display: flex; 
+    gap: 30px; 
+    align-items: center;
+}
 
-/* 1. اللوجو الأساسي (يجب أن يكون باللون الأبيض دائماً) */
+/* 1. اللوجو - اللون الأبيض ثابت */
 .logo {
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--white); /* تأكد من أنه أبيض هنا */
-    text-decoration: none;
+    color: var(--white);
     letter-spacing: 1px;
     display: flex;
     align-items: center; 
 }
 
-/* 2. النقطة الزرقاء (تظل بلون التمييز الأساسي) */
 .logo-dot {
     color: var(--primary-color);
     font-size: 2.5rem;
@@ -99,24 +99,15 @@ ul { list-style: none; }
     display: inline-block;
 }
 
-/* ملاحظة: بما أن لون الشعار هو var(--white) في الحالة الطبيعية 
-   وحالة التمرير (.scrolled) تستخدم خلفية داكنة، فلن نحتاج 
-   إلى تعديل إضافي في حالة التمرير، حيث سيظل الأبيض مرئياً.
-*/
-
-.nav-menu {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-}
-
+/* تنسيق الروابط */
 .nav-link {
     color: var(--text-on-dark); 
     font-weight: 500;
-    font-size: 1rem;
     transition: var(--transition-smooth);
     position: relative;
-    padding: 5px 0; 
+    padding-bottom: 5px;
+    display: flex;
+    align-items: center;
 }
 
 .nav-link i { margin-right: 5px; }
@@ -131,16 +122,17 @@ ul { list-style: none; }
     width: 0;
     height: 3px;
     bottom: -8px;
-    left: 50%; /* تبدأ من المنتصف */
-    transform: translateX(-50%); /* للتركيز في المنتصف */
+    left: 50%; 
+    transform: translateX(-50%); 
     background-color: var(--primary-color);
-    transition: var(--transition-smooth);
+    transition: width 0.3s ease;
 }
 
 .nav-link:hover::after, .nav-link.active::after {
     width: 100%;
 }
 
+/* زر الهامبرغر - مخفي على الديسكتوب */
 .hamburger {
     display: none; 
     cursor: pointer;
@@ -158,41 +150,79 @@ ul { list-style: none; }
 }
 
 /* ---------------------------------- */
-/* Mobile Responsiveness */
+/* 3. Mobile Responsiveness ( < 992px) */
 /* ---------------------------------- */
-@media (max-width: 768px) {
-    .hamburger { display: block; }
+@media (max-width: 992px) { 
     
-    .hamburger.active .bar:nth-child(2) { opacity: 0; }
-    .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
+    /* إظهار زر القائمة وإخفاء القائمة الأفقية */
+    .hamburger { display: block; }
+    .nav-menu { display: none; } 
+    
+    /* تنسيق القائمة المنسدلة */
     .nav-menu {
         position: fixed;
         left: -100%; 
         top: 0;
-        flex-direction: column;
+        flex-direction: column; 
         background-color: var(--secondary-color); 
         width: 70%; 
         height: 100vh;
-        text-align: center;
-        padding-top: 100px;
+        text-align: left; 
+        justify-content: center; 
+        padding-top: 0; 
         transition: 0.4s ease;
         box-shadow: 5px 0 15px rgba(0,0,0,0.5);
     }
+    
+    .nav-menu.active { 
+        left: 0;
+        display: flex;
+    }
 
-    .nav-menu.active { left: 0; }
-    .nav-link { font-size: 1.2rem; margin: 20px 0; display: block; }
+    .nav-link { 
+        font-size: 1.2rem; 
+        margin: 15px 0; 
+        display: block; 
+        padding-left: 20px; 
+    }
+    
+    .nav-link i {
+        font-size: 1.4rem; 
+        vertical-align: middle;
+    }
+    
+    /* حركات زر الهامبرغر */
+    .hamburger.active .bar:nth-child(2) { opacity: 0; }
+    .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
+
+    /* About Section Mobile Fixes */
+    .about-container { flex-direction: column; align-items: center; text-align: center; }
+    .about-text { order: 2; }
+    .about-image { order: 1; margin-bottom: 30px; }
     .hero-content h1 { font-size: 2.5rem; }
     .stats-grid { flex-direction: column; gap: 30px; }
     
-    .about-container { flex-direction: column; align-items: center; text-align: center; }
-    .about-image { margin-bottom: 30px; }
+    /* Timeline Mobile - تم الإبقاء على التوسيط في الموبايل */
+    .timeline-container { padding-left: 0; }
+    
+    /* تم تجميع النقاط والدائرة في الموبايل */
+    .timeline-dot {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .timeline-item {
+        padding-left: 0;
+        text-align: center;
+    }
+    .timeline-content {
+        margin-top: 20px;
+    }
 }
 
 /* ---------------------------------- */
-/* Hero Section (Smooth & Dark) */
+/* 4. Hero Section (Smooth & Dark) */
 /* ---------------------------------- */
 .hero {
     height: 100vh;
@@ -203,11 +233,11 @@ ul { list-style: none; }
     text-align: center;
     color: var(--white);
     position: relative;
-    box-shadow: inset 0 -10px 20px rgba(0,0,0,0.5); /* إضافة عمق */
+    box-shadow: inset 0 -10px 20px rgba(0,0,0,0.5); 
 }
 
 .hero-content h1 {
-    font-size: 4.5rem; /* حجم أكبر */
+    font-size: 4.5rem; 
     margin: 10px 0;
     background: linear-gradient(to right, var(--primary-color), #00d2ff);
     -webkit-background-clip: text;
@@ -227,7 +257,7 @@ ul { list-style: none; }
 
 .cursor {
     display: inline-block;
-    width: 3px; /* سمك أكبر */
+    width: 3px; 
     background-color: var(--primary-color);
     animation: blink 0.8s infinite;
 }
@@ -242,7 +272,7 @@ ul { list-style: none; }
 }
 
 .main-cta-btn, .secondary-cta-btn {
-    padding: 14px 35px; /* حجم أكبر */
+    padding: 14px 35px; 
     border-radius: 50px;
     font-weight: 600;
     cursor: pointer;
@@ -276,7 +306,7 @@ ul { list-style: none; }
 }
 
 /* ---------------------------------- */
-/* Sections Styling */
+/* 5. Sections Styling (Global) */
 /* ---------------------------------- */
 .section {
     padding: 100px 5%; 
@@ -284,9 +314,7 @@ ul { list-style: none; }
     margin: 0 auto;
 }
 
-/* ---------------------------------- */
-/* 2. Section Title with Icon (عنوان القسم والأيقونة) */
-/* ---------------------------------- */
+/* Section Title with Icon */
 h2.section-title {
     text-align: center;
     font-size: 3rem; 
@@ -294,57 +322,43 @@ h2.section-title {
     color: var(--secondary-color);
     position: relative;
     padding-bottom: 15px;
-    display: flex; /* لجعل الأيقونة والنص في سطر واحد */
-    justify-content: center; /* لتوسيط الكل */
+    display: flex; 
+    justify-content: center; 
     align-items: center;
-    gap: 15px; /* المسافة بين الأيقونة والنص */
+    gap: 15px; 
 }
 
 h2.section-title i {
-    font-size: 2.5rem; /* حجم الأيقونة */
+    font-size: 2.5rem; 
     color: var(--primary-color);
 }
 
 h2.section-title::after {
-    /* ... (Existing styles for the underline) ... */
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 4px;
+    background-color: var(--primary-color);
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
 }
 
 /* ---------------------------------- */
-/* About Section Styling */
+/* 6. About Section Styling */
 /* ---------------------------------- */
-/* About Section Styling */
 .about-section {
     background-color: var(--white);
 }
 
-/* ---------------------------------- */
-/* 3. About Section Layout (تخطيط قسم About Me) */
-/* ---------------------------------- */
 .about-container {
     display: flex;
-    flex-direction: row; /* النص على اليسار والصورة على اليمين */
+    flex-direction: row; 
     gap: 80px;
-    align-items: center; /* محاذاة العناصر عمودياً في المنتصف */
+    align-items: center; 
     padding-top: 0; 
 }
-
-/* في الشاشات الصغيرة: الصورة فوق النص */
-@media (max-width: 992px) { /* تغيير نقطة التوقف قليلاً */
-    .about-container {
-        flex-direction: column; 
-        align-items: center; 
-        text-align: center;
-        gap: 40px;
-    }
-    .about-text {
-        order: 2; /* جعل النص يظهر بعد الصورة في الموبايل */
-    }
-    .about-image {
-        order: 1; /* جعل الصورة تظهر أولاً في الموبايل */
-    }
-}
-
-/* ... (بقية تنسيقات .profile-image و .about-text كما هي) ... */
 
 .about-image {
     flex-shrink: 0; 
@@ -352,11 +366,11 @@ h2.section-title::after {
 }
 
 .profile-image {
-    width: 250px; /* حجم أكبر */
+    width: 250px; 
     height: 250px;
     object-fit: cover;
     border-radius: 50%;
-    border: 6px solid var(--primary-color); /* إطار أسمك */
+    border: 6px solid var(--primary-color); 
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
     transition: var(--transition-smooth);
     display: block; 
@@ -374,7 +388,7 @@ h2.section-title::after {
 }
 
 .about-text h3 {
-    font-size: 1.8rem; /* حجم أكبر */
+    font-size: 1.8rem; 
     color: var(--secondary-color);
     margin-bottom: 25px;
     font-weight: 600;
@@ -391,11 +405,7 @@ h2.section-title::after {
     color: var(--primary-dark);
 }
 
-/* Stats */
-/* Stats */
-/* ---------------------------------- */
-/* 4. Stats Grid (الحواف الناعمة) */
-/* ---------------------------------- */
+/* Stats Grid */
 .stats-grid {
     display: flex;
     justify-content: space-between; 
@@ -403,11 +413,8 @@ h2.section-title::after {
     text-align: center;
     padding: 30px 40px; 
     background: #f8f8f8;
-    
     border-radius: 20px; 
-    
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); 
-    
     border: 1px solid #eee;
     transition: var(--transition-smooth);
 }
@@ -415,16 +422,12 @@ h2.section-title::after {
     transform: translateY(-3px);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); 
 }
-/* ... (بقية تنسيقات .stat-item) ... */
-/* إضافة تأثير عند المرور (اختياري، لزيادة الجاذبية) */
-.stats-grid:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); 
-}
 .stat-item h3 { font-size: 3rem; color: var(--primary-color); }
 .stat-item p { color: var(--text-light); font-weight: 500;}
 
-/* Skills */
+/* ---------------------------------- */
+/* 7. Skills Section */
+/* ---------------------------------- */
 .skills-category {
     background: var(--white);
     padding: 35px;
@@ -448,9 +451,9 @@ h2.section-title::after {
     gap: 15px;
 }
 .skill-tag {
-    background: #eef2ff; /* خلفية فاتحة للتاج */
+    background: #eef2ff; 
     padding: 10px 20px;
-    border-radius: 25px; /* حواف أكثر استدارة */
+    border-radius: 25px; 
     font-weight: 600;
     border: 1px solid var(--primary-color);
     transition: var(--transition-smooth);
@@ -468,7 +471,137 @@ h2.section-title::after {
     font-size: 1.1rem;
 }
 
-/* Contact */
+
+/* ---------------------------------- */
+/* 8. Global Smooth Card Style        */
+/* ---------------------------------- */
+.smooth-card {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 15px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+    transition: all 0.4s ease;
+    border: 1px solid #eee;
+}
+
+.smooth-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ---------------------------------- */
+/* 9. Education Timeline (المُعدَّل)      */
+/* ---------------------------------- */
+.timeline-section {
+    background-color: #f7f7f7; 
+}
+.timeline-container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    /* الحفاظ على الـ padding-left لتوفير مساحة للدوائر */
+    padding-left: 30px; 
+}
+/* ❌ تم حذف الكود الخاص بـ .timeline-container::before لإزالة الخط الرأسي */
+
+.timeline-item {
+    margin-bottom: 50px;
+    position: relative;
+    /* الحفاظ على الـ padding-left لتبدأ الكتابة من اليسار بعد الدائرة */
+    padding-left: 30px;
+}
+.timeline-dot {
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    position: absolute;
+    /* الحفاظ على left: -10px لتظهر الدائرة على اليسار */
+    left: -10px; 
+    top: 0;
+    border: 4px solid var(--white);
+    box-shadow: 0 0 0 3px var(--primary-color);
+}
+.timeline-content {
+    padding: 25px;
+    /* التأكد من محاذاة النص لليسار */
+    text-align: left; 
+}
+.timeline-date {
+    display: block;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+.timeline-institution {
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+
+/* ---------------------------------- */
+/* 10. Certificates Grid              */
+/* ---------------------------------- */
+.certificates-section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+.certificates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+.certificate-card {
+    text-align: center;
+    padding: 40px 30px;
+}
+
+.cert-icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+.certificate-card h4 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+.cert-issuer {
+    color: var(--text-light);
+    font-weight: 500;
+    margin-bottom: 15px;
+    display: block;
+}
+.cert-date {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+.btn-cert {
+    display: inline-block;
+    padding: 8px 20px;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.btn-cert:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+
+/* ---------------------------------- */
+/* 11. Contact Section */
+/* ---------------------------------- */
 .contact-section { text-align: center; background: #f8f8f8; padding-bottom: 50px; }
 .contact-section p {
     max-width: 600px;
@@ -492,53 +625,40 @@ h2.section-title::after {
 }
 
 /* ---------------------------------- */
-/* Social Icons Styling */
+/* 12. Social Icons Styling - Smooth Look */
 /* ---------------------------------- */
-
-/* ---------------------------------- */
-/* Social Icons Styling - Smooth Look */
-/* ---------------------------------- */
-
 .social-links {
     margin-top: 40px;
     margin-bottom: 0; 
     display: flex;
     justify-content: center;
-    gap: 25px; /* مسافة أكبر */
+    gap: 25px; 
 }
 
-/* التعديل هنا: نستخدم .social-links a لأن هذا هو العنصر الحامل للأيقونة والدائرة */
 .social-links a {
     width: 55px;
     height: 55px;
     background: var(--white);
     border-radius: 50%;
-    
-    /* زيادة الظل لجعله أكثر نعومة وبروزاً */
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); 
-    
     border: 1px solid #ddd;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.4rem;
     color: var(--secondary-color);
-    transition: var(--transition-smooth); /* استخدام الانتقال السلس */
+    transition: var(--transition-smooth); 
 }
 
 .social-links a:hover {
     background: var(--primary-color);
     color: var(--white);
-    
-    /* إضافة حركة عند المرور عليها */
     transform: translateY(-8px) rotate(2deg); 
-    
-    /* ظل أقوى عند المرور */
     box-shadow: 0 15px 30px rgba(0, 123, 255, 0.4); 
 }
 
 /* ---------------------------------- */
-/* Footer */
+/* 13. Footer */
 /* ---------------------------------- */
 footer {
     background: #111;
