@@ -196,32 +196,31 @@ ul { list-style: none; }
         width: 100%; 
     }
     
-    /* 🛠️ تعديلات قسم About للتابلت/شاشات صغيرة */
-    .about-container {
-        flex-direction: column; 
-        gap: 30px;
-        text-align: center; 
-    }
-    /* 🔑 الترتيب المطلوب: الصورة (أولاً) */
-    .about-image { order: -1; } 
-    .about-text {
-        order: 0;
-        text-align: center;
-        width: 100%; 
-        max-width: none; 
-    }
-    .about-text p { 
-        text-align: justify;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .stats-grid { 
-        order: 1; /* 🔑 الإحصائيات (ثالثاً) */
-        flex-wrap: wrap; 
-        justify-content: center; 
-        gap: 20px; 
-    }
+    /* ---------------------------------- */
+/* 8. About Section Styling */
+/* ---------------------------------- */
+/* ... الكود الحالي ... */
+
+.about-container {
+display: flex;
+flex-direction: row; 
+gap: 80px;
+align-items: center; 
+padding-top: 0; 
+}
+/* 🔑 إضافة ترتيب الأولوية للديسكتوب */
+.about-image { 
+order: 0; /* الصورة أولاً */
+flex-shrink: 0; /* لضمان عدم تقلصها */
+} 
+.about-text {
+order: 1; /* النص ثانياً */
+flex-grow: 1;
+}
+.stats-grid { 
+order: 2; /* الجدول ثالثاً */
+}
+/* ... أكمل باقي أكواد قسم 8 ... */
     .stat-item { flex-basis: 30%; max-width: 100px; } 
 
     /* 🛠️ تعديلات قسم Education للتابلت/شاشات صغيرة */
@@ -243,6 +242,48 @@ ul { list-style: none; }
     }
 }
 
+/* ---------------------------------- */
+/* 3. Mobile Responsiveness ( < 992px) */
+/* ---------------------------------- */
+@media (max-width: 992px) { 
+
+    /* ... أكواد أخرى ... */
+
+    /* 🛠️ تعديلات قسم About للتابلت/شاشات صغيرة */
+ .about-container {
+ flex-direction: column;/* الترتيب يصبح عموديًا */
+ gap: 30px;
+ text-align: center;
+ }
+
+     /* 🔑 تطبيق الترتيب المطلوب: الصورة (0)، النص (1)، الجدول (2) */
+.about-image {
+ order: 0; /* الصورة أولاً */
+ }
+ .about-text {
+ order: 1; /* النص ثانياً */
+ text-align: center;
+ width: 100%;
+ max-width: none;
+ }
+.about-text p {
+ text-align: left;
+ max-width: 600px;
+ margin-left: auto;
+ margin-right: auto;
+ }
+.stats-grid {
+order: 2; /* الجدول ثالثاً */
+flex-wrap: wrap;
+justify-content: center;
+gap: 20px;
+}
+ .stat-item { flex-basis: 30%; max-width: 150px; }
+ 
+
+
+ /* ... أكواد أخرى ... */
+}
 /* ---------------------------------- */
 /* 4. Phone Optimization (max-width: 600px) */
 /* ---------------------------------- */
@@ -781,4 +822,183 @@ footer {
     text-align: center;
     padding: 25px;
     font-size: 0.9rem;
+}
+
+/* تنسيق الديف اللي فيه صورة About */
+.about-img {
+    position: absolute;
+    right: 5%;
+    bottom: 0;
+}
+
+.about-img img {
+    width: 320px;
+    object-fit: cover;
+}
+
+/* شاشات أقل من 992px (تابلت وموبايل) */
+@media (max-width: 992px) {
+    .about-img {
+        position: static;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .about-img img {
+        width: 220px;
+    }
+}
+
+/* شاشات كبيرة (لابتوب وكمبيوتر) */
+@media (min-width: 1200px) {
+    .about-img {
+        right: 8%;
+        bottom: 0;
+    }
+
+    .about-img img {
+        width: 360px;
+    }
+}
+/* =============================== */
+/* GLOBAL FIXED */
+/* =============================== */
+
+html, body {
+    overflow-x: hidden !important;
+}
+
+/* =============================== */
+/* RESPONSIVE — MOBILE (max 768px) */
+/* =============================== */
+
+@media (max-width: 768px) {
+
+    section {
+        padding: 40px 15px !important;
+        text-align: center;
+    }
+
+    /* HERO */
+    .hero {
+        flex-direction: column !important;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .hero-text {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .hero-image img,
+    .hero-image .circle {
+        width: 220px !important;
+        height: 220px !important;
+    }
+
+    /* ABOUT */
+    .about-container {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    .about-img {
+        position: static !important;
+        margin: 0 !important;
+        text-align: center;
+    }
+
+    .about-img img {
+        width: 220px !important;
+        height: auto !important;
+    }
+
+    .about-text {
+        width: 100% !important;
+        margin-top: 20px;
+    }
+
+    /* PROJECTS */
+    .projects-container {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* CONTACT */
+    .contact-container {
+        flex-direction: column !important;
+        text-align: center !important;
+    }
+
+    .contact-left,
+    .contact-right {
+        width: 100% !important;
+    }
+
+    /* NAV */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background: #0b0b0b;
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+        transition: 0.4s ease;
+    }
+
+    .nav-menu.active { right: 0; }
+
+    .hamburger { display: block !important; z-index: 2000; }
+
+    nav ul li a {
+        font-size: 20px !important;
+    }
+}
+@media (min-width: 769px) and (max-width: 992px) {
+
+    .hero {
+        flex-direction: row;
+        gap: 30px;
+    }
+
+    .hero-image img {
+        width: 280px !important;
+    }
+
+    .about-container {
+        flex-direction: row !important;
+        text-align: left !important;
+    }
+
+    .projects-container {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+@media (min-width: 993px) {
+
+    .about-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: left !important;
+        position: relative;
+    }
+
+    .about-img {
+        position: absolute;
+        right: 5%;
+        bottom: 0;
+    }
+
+    .about-img img {
+        width: 320px;
+    }
+
+    .about-text {
+        width: 60%;
+    }
 }
