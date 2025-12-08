@@ -164,7 +164,7 @@ ul { list-style: none; }
         top: 0;
         flex-direction: column; 
         background-color: var(--secondary-color); 
-        width: 50%; /* تم تقليل عرض القائمة للتابلت */
+        width: 50%; 
         height: 100vh;
         text-align: left; 
         justify-content: center; 
@@ -182,24 +182,29 @@ ul { list-style: none; }
          padding: 0 4%; 
     }
     
-    .timeline-item {
-        flex-direction: column; 
-        align-items: center; 
-        text-align: center;
-    }
-    
-    .timeline-content {
-        width: 100%; 
-        text-align: center; 
-    }
-    
+    /* 🛠️ تعديلات قسم About للتابلت/شاشات صغيرة */
     .about-container {
         flex-direction: column; 
         gap: 30px;
         text-align: center; 
     }
+    .about-image { order: -1; } /* وضع الصورة في الأعلى */
     .about-text p { text-align: justify; }
+    .stats-grid { flex-wrap: wrap; justify-content: center; gap: 20px; }
+    .stat-item { flex-basis: 30%; max-width: 100px; } /* لضمان عرض 3 عناصر في صف */
 
+    /* 🛠️ تعديلات قسم Education للتابلت/شاشات صغيرة */
+    .timeline-item {
+        flex-direction: column; 
+        align-items: center; 
+        text-align: center;
+        gap: 15px;
+    }
+    .institution-logo-container { margin-top: 0; }
+    .timeline-content {
+        width: 100%; 
+        text-align: center; 
+    }
 }
 
 /* ---------------------------------- */
@@ -223,7 +228,26 @@ ul { list-style: none; }
     h2.section-title { font-size: 2rem; margin-bottom: 30px; }
     .section { padding: 60px 4%; }
     
+    /* 🛠️ تعديلات قسم About للهواتف */
+    .stats-grid { flex-direction: column; gap: 25px; padding: 25px; }
+    .stat-item { max-width: none; }
+    
+    /* 🛠️ تعديلات قسم Skills للهواتف */
+    .skills-category { padding: 25px; }
+    .skills-grid { justify-content: center; } /* جعل الـ tags في المنتصف */
+    .skill-tag { font-size: 0.9rem; }
+    
+    /* 🛠️ تعديلات قسم Certificates للهواتف */
+    .certificates-grid {
+        /* يتم التحكم بها بواسطة minmax(300px, 1fr) وستتحول إلى عمود واحد إذا كانت الشاشة أصغر من 300px */
+        grid-template-columns: 1fr; 
+    }
+    
+    .social-links { gap: 15px; }
     .social-links a { width: 45px; height: 45px; font-size: 1.2rem; }
+    
+    .email-link { font-size: 1.1rem; }
+    .email-link i { margin-right: 8px; font-size: 1.3rem; }
 }
 
 /* ---------------------------------- */
@@ -348,7 +372,7 @@ h2.section-title::after {
 }
 
 /* ---------------------------------- */
-/* 7. Global Smooth Card Style        */
+/* 7. Global Smooth Card Style        */
 /* ---------------------------------- */
 .smooth-card {
     background-color: var(--white);
@@ -473,130 +497,59 @@ h2.section-title::after {
 }
 
 /* ---------------------------------- */
-
-/* 7. Skills Section */
-
+/* 10. Skills Section */
 /* ---------------------------------- */
-
 .skills-category {
-
     background: var(--white);
-
     padding: 35px;
-
     border-radius: 15px;
-
     box-shadow: var(--shadow-light);
-
     margin-bottom: 40px;
-
     transition: var(--transition-smooth);
-
     border-left: 5px solid var(--primary-color);
-
 }
 
-.skills-category:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); }
-
-
+.skills-category:hover { 
+    transform: translateY(-8px); 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); 
+}
 
 .skills-category h3 {
-
     font-size: 1.5rem;
-
     margin-bottom: 20px;
-
     color: var(--primary-dark);
-
 }
 
-
-
 .skills-grid {
-
     display: flex;
-
     flex-wrap: wrap;
-
     gap: 15px;
-
+    justify-content: start; /* تأكيد المحاذاة لليسار على الديسكتوب */
 }
 
 .skill-tag {
-
     background: #eef2ff;
-
     padding: 10px 20px;
-
     border-radius: 25px;
-
     font-weight: 600;
-
     border: 1px solid var(--primary-color);
-
     transition: var(--transition-smooth);
-
     display: flex;
-
     align-items: center;
-
     gap: 10px;
-
     color: var(--secondary-color);
-
 }
 
 .skill-tag:hover {
-
     background: var(--primary-color);
-
     color: var(--white);
-
     transform: scale(1.05);
-
 }
 
 .skill-tag i {
-
     font-size: 1.1rem;
-
 }
 
-
-
-
-
-/* ---------------------------------- */
-
-/* 8. Global Smooth Card Style        */
-
-/* ---------------------------------- */
-
-.smooth-card {
-
-    background-color: var(--white);
-
-    padding: 30px;
-
-    border-radius: 15px;
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-
-    transition: all 0.4s ease;
-
-    border: 1px solid #eee;
-
-}
-
-
-
-.smooth-card:hover {
-
-    transform: translateY(-5px);
-
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-
-}
 /* ---------------------------------- */
 /* 11. Certificates Section (New Design) */
 /* ---------------------------------- */
@@ -606,7 +559,7 @@ h2.section-title::after {
 
 .certificates-grid {
     display: grid;
-    /* عمودان على الديسكتوب */
+    /* عمودان على الديسكتوب، ويتحول إلى عمود واحد تلقائياً على الشاشات الأصغر من 300px */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
     gap: 30px; 
     padding: 20px 0;
@@ -668,7 +621,7 @@ h2.section-title::after {
 }
 
 /* ---------------------------------- */
-/* 11. Projects Section (المشاريع)    */
+/* 12. Projects Section (المشاريع)    */
 /* ---------------------------------- */
 .projects-section {
     background-color: #f7f7f7; 
@@ -691,7 +644,7 @@ h2.section-title::after {
 }
 
 /* ---------------------------------- */
-/* 13. Contact Section (التعديلات المطلوبة) */
+/* 13. Contact Section */
 /* ---------------------------------- */
 
 .contact-section { 
@@ -715,7 +668,7 @@ h2.section-title::after {
 /* 2. التحكم في الفراغ بين الإيميل وأيقونات الميديا */
 .contact-details {
     /* تم تقليل الهامش السفلي لتقريب أيقونات الميديا */
-    margin: 40px auto 20px; /* 20px هامش سفلي بدلاً من 50px */
+    margin: 40px auto 20px; 
     text-align: center; 
 }
 
@@ -747,47 +700,12 @@ h2.section-title::after {
 }
 
 .social-links {
-    /* هنا نضمن أن الهامش العلوي صغير للمسة جميلة */
-    margin-top: 20px; 
-    margin-bottom: 0; 
-    display: flex;
-    justify-content: center;
-    gap: 25px; 
-}
-
-/* ... باقي تنسيقات social-links */
-
-/* ---------------------------------- */
-/* تعديل النص الرئيسي في قسم التواصل (اختياري) */
-/* ---------------------------------- */
-.contact-section p {
-    max-width: 600px;
-    margin: 20px auto 40px; 
-    font-size: 1.1rem;
-    color: #444; /* لون أغمق قليلاً لتحسين القراءة */
-    line-height: 1.7;
-}
-
-/* ---------------------------------- */
-
-/* 12. Social Icons Styling - Smooth Look */
-
-/* ---------------------------------- */
-
-.social-links {
-
     margin-top: 40px;
-
     margin-bottom: 0;
-
     display: flex;
-
     justify-content: center;
-
     gap: 25px;
-
 }
-
 
 
 .social-links a {
@@ -832,10 +750,8 @@ h2.section-title::after {
 
 }
 
-
-
 /* ---------------------------------- */
-/* 13. Footer */
+/* 14. Footer */
 /* ---------------------------------- */
 footer {
     background: #111;
