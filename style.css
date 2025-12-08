@@ -213,30 +213,28 @@ ul { list-style: none; }
         margin-right: auto;
     }
     
-    /* 4. قسم Education Timeline (التعديلات المطلوبة: اللوجو ⬅️ البطاقة) */
+    /* 4. قسم Education Timeline (الترتيب: اللوجو ⬅️ البطاقة - عمودي) */
     .timeline-container { 
-        /* إزالة الخط العمودي للتبسيط */
-        border-left: none; 
+        border-left: none; /* تم إلغاؤه */
         padding-left: 0; 
         max-width: 95%; 
     }
-    .timeline-container::before { content: none; } /* إزالة الخط الأزرق الكبير */
+    .timeline-container::before { content: none; } /* تم إلغاؤه */
     
     .timeline-item {
-        /* الترتيب عموديًا */
         flex-direction: column; 
-        align-items: center; /* توسيط العناصر */
+        align-items: center; 
         gap: 15px; 
         margin-bottom: 50px;
-        padding-left: 0; /* إزالة البادينج الداخلي */
+        padding-left: 0; 
         text-align: center;
     }
     
-    /* إظهار اللوجو وتحديد ترتيبه ليكون الأول */
+    /* اللوجو أولاً */
     .institution-logo-container {
-        display: block; /* إلغاء الإخفاء */
-        order: 1; /* اللوجو أولاً */
-        width: 80px; /* تصغير حجم اللوجو */
+        display: block; 
+        order: 1; 
+        width: 80px; 
         margin-top: 0;
     }
     .institution-logo {
@@ -245,21 +243,27 @@ ul { list-style: none; }
         margin: 0 auto;
     }
     
-    /* إخفاء النقطة والخط القديمين تماماً لجعل التصميم عمودياً نظيفاً */
+    /* إخفاء النقطة */
     .timeline-dot {
         display: none; 
     }
     
     /* البطاقة ثانيًا */
     .timeline-content {
-        order: 2; /* البطاقة ثانيًا */
+        order: 2; 
         padding: 20px; 
         max-width: 100%; 
         width: 100%; 
-        text-align: center; /* توسيط محتوى البطاقة */
+        text-align: center; 
     }
     .timeline-content p {
-        text-align: center; /* التأكد من توسيط النص الداخلي */
+        text-align: center; 
+    }
+    /* 5. Contact Section */
+    .social-links a { 
+        width: 40px; 
+        height: 40px; 
+        font-size: 1.1rem; 
     }
 }
 
@@ -530,7 +534,7 @@ h2.section-title::after {
 
 
 /* ---------------------------------- */
-/* 9. Education Timeline (Desktop)      */
+/* 9. Education Timeline (Standard)      */
 /* ---------------------------------- */
 .timeline-section {
     background-color: #f7f7f7; 
@@ -539,62 +543,56 @@ h2.section-title::after {
     max-width: 1000px;
     margin: 0 auto;
     position: relative;
-    /* مسافة الخط على الديسكتوب */
-    padding-left: 30px; 
+    /* إلغاء البادينج الخاص بالخط */
+    padding-left: 0; 
 }
-/* الخط الأزرق العمودي للـ Timeline على الديسكتوب */
+/* ************* إزالة الخط العمودي للـ Timeline ************* */
 .timeline-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0; 
-    width: 3px;
-    background-color: var(--primary-color);
-    margin-left: 10px; 
+    content: none; 
 }
 
 .timeline-item {
-    margin-bottom: 90px; 
+    margin-bottom: 40px; /* تقليل المسافة بما أنه لا يوجد خط */
     position: relative;
-    padding-left: 30px;
+    /* إلغاء البادينج الخاص بالخط */
+    padding-left: 0;
+    
+    /* جعل العناصر في سطر واحد على الديسكتوب (افتراضياً) */
     display: flex;
-    flex-direction: row-reverse; /* الترتيب الافتراضي (اللوجو على اليمين) */
+    flex-direction: row; 
     align-items: flex-start;
-    gap: 80px; 
+    gap: 30px; /* تقليل المسافة بين اللوجو والبطاقة */
+    justify-content: center; /* توسيط العناصر في المنتصف */
 }
+
+/* ************* إزالة النقطة ************* */
 .timeline-dot {
-    width: 20px;
-    height: 20px;
-    background: var(--primary-color);
-    border-radius: 50%;
-    position: absolute;
-    left: -10px; 
-    top: 0;
-    border: 4px solid var(--white);
-    box-shadow: 0 0 0 3px var(--primary-color);
+    display: none; 
 }
+
 .timeline-content {
+    /* السماح للبطاقة بأخذ جزء كبير من العرض */
     width: 100%; 
     max-width: 700px; 
-    flex-grow: 0; 
-    flex-shrink: 0;
-    padding: 45px; 
+    flex-grow: 1; 
+    padding: 30px; /* تقليل البادينج الداخلي */
     text-align: left; 
     margin-right: 0; 
 }
+
 .institution-logo-container {
     flex-shrink: 0; 
-    width: 120px; 
-    margin-top: 25px; 
-    display: block; /* للتأكد من ظهوره على الديسكتوب */
+    width: 100px; /* تصغير اللوجو قليلاً على الديسكتوب أيضاً */
+    margin-top: 15px; /* رفع اللوجو قليلاً ليتماشى مع البطاقة */
+    display: block; 
+    text-align: center;
 }
 .institution-logo {
-    width: 120px; 
-    height: 120px;
+    width: 100px; 
+    height: 100px;
     object-fit: contain; 
     border-radius: 10px; 
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* تخفيف الظل */
     transition: transform 0.3s ease; 
     display: block; 
 }
@@ -752,10 +750,7 @@ footer {
     }
     
     /* قسم About Me (الترتيب: صورة ⬅️ نص ⬅️ إحصائيات) */
-    .about-container { 
-        flex-direction: column; 
-        gap: 25px; 
-    }
+    .about-container { flex-direction: column; gap: 25px; }
     .about-image { order: 1; margin-bottom: 0; }
     .profile-image { width: 180px; height: 180px; }
     .about-text { order: 2; text-align: center; }
@@ -764,14 +759,13 @@ footer {
     .stat-item h3 { font-size: 2.5rem; }
     
     
-    /* ************* قسم Education Timeline (الترتيب: لوجو ⬅️ بطاقة) ************* */
+    /* ************* قسم Education Timeline (عمودي) ************* */
     .timeline-container { 
-        border-left: none; /* إزالة الخط العمودي */
         padding-left: 0; 
     }
     
     .timeline-item {
-        flex-direction: column; /* جعل الترتيب عموديًا */
+        flex-direction: column; 
         align-items: center;
         gap: 15px; 
         margin-bottom: 40px;
@@ -779,9 +773,8 @@ footer {
         text-align: center;
     }
     
-    /* اللوجو - أولاً */
     .institution-logo-container {
-        display: block; /* إظهار اللوجو */
+        display: block; 
         order: 1; 
         width: 80px; 
         margin-top: 0;
@@ -791,12 +784,6 @@ footer {
         height: 80px;
     }
     
-    /* النقطة - إخفاءها */
-    .timeline-dot {
-        display: none; 
-    }
-    
-    /* البطاقة - ثانيًا */
     .timeline-content {
         order: 2; 
         padding: 15px; 
@@ -806,7 +793,7 @@ footer {
     .timeline-content p {
         text-align: center;
     }
-    /* ****************************************************************************** */
+    /* ********************************************************** */
 
     /* Social Icons */
     .social-links a { 
