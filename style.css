@@ -36,7 +36,7 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
-    /* ************* حل مشكلة الزيادة الجانبية (Overflow) ************* */
+    /* حل مشكلة الزيادة الجانبية (Overflow) */
     overflow-x: hidden; 
 }
 
@@ -179,24 +179,7 @@ ul { list-style: none; }
         display: flex;
     }
 
-    .nav-link { 
-        font-size: 1.2rem; 
-        margin: 15px 0; 
-        display: block; 
-        padding-left: 20px; 
-    }
-    
-    .nav-link i { font-size: 1.4rem; vertical-align: middle; }
-    
-    .hamburger.active .bar:nth-child(2) { opacity: 0; }
-    .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-    /* 2. قسم Hero */
-    .hero-content h1 { font-size: 3rem; }
-    .hero h2 { font-size: 1.5rem; }
-
-    /* 3. العناوين والأقسام */
+    /* 2. العناوين والأقسام */
     h2.section-title { 
         font-size: 2rem; 
         margin-bottom: 40px; 
@@ -208,83 +191,75 @@ ul { list-style: none; }
          padding: 0 4%; 
     }
     
-    /* 4. قسم About Me (التعديلات المطلوبة) */
+    /* 3. قسم About Me (الترتيب: صورة ⬅️ نص ⬅️ إحصائيات) */
     .about-container { 
         flex-direction: column; 
         align-items: center; 
         text-align: center; 
-        gap: 30px; /* زيادة المسافة بين العناصر */
+        gap: 30px; 
     }
-    
-    /* تحديد ترتيب العناصر هنا: */
-    /* 1. الصورة (Profile Image) */
-    .about-image { 
-        order: 1; 
-        margin-bottom: 0; /* تم نقل المسافة إلى الحاوية الأساسية */
-    }
-    
-    /* 2. النص (About Text) */
-    .about-text { 
-        order: 2; 
-        padding-top: 0;
-        text-align: center;
-    }
-    .about-text p { 
-        text-align: justify; /* محاذاة النص على الجانبين */
-        padding: 0 5px; 
-    }
-    
-    /* 3. الإحصائيات (Stats Grid) */
+    .about-image { order: 1; margin-bottom: 0; }
+    .about-text { order: 2; padding-top: 0; text-align: center; }
+    .about-text p { text-align: justify; padding: 0 5px; }
     .stats-grid { 
-        order: 3; /* ضمان ظهورها في الأسفل */
+        order: 3; 
         flex-direction: column; 
         gap: 20px; 
-        padding: 20px 10px; /* تقليل البادينج الداخلي أكثر */
+        padding: 20px 10px; 
         margin-top: 0;
         width: 100%; 
         max-width: 400px;
         margin-left: auto;
         margin-right: auto;
     }
-    .stat-item h3 { font-size: 2rem; }
     
-
-    /* 5. قسم Education Timeline */
+    /* 4. قسم Education Timeline (التعديلات المطلوبة: اللوجو ⬅️ البطاقة) */
     .timeline-container { 
-        border-left: 3px solid var(--primary-dark);
-        padding-left: 20px; 
+        /* إزالة الخط العمودي للتبسيط */
+        border-left: none; 
+        padding-left: 0; 
         max-width: 95%; 
     }
-    .timeline-container::before { content: none; } 
+    .timeline-container::before { content: none; } /* إزالة الخط الأزرق الكبير */
     
     .timeline-item {
-        flex-direction: row; 
-        align-items: flex-start;
+        /* الترتيب عموديًا */
+        flex-direction: column; 
+        align-items: center; /* توسيط العناصر */
         gap: 15px; 
         margin-bottom: 50px;
+        padding-left: 0; /* إزالة البادينج الداخلي */
+        text-align: center;
     }
     
+    /* إظهار اللوجو وتحديد ترتيبه ليكون الأول */
     .institution-logo-container {
-        display: none; /* إخفاء اللوجو الكبير في الموبايل */
+        display: block; /* إلغاء الإخفاء */
+        order: 1; /* اللوجو أولاً */
+        width: 80px; /* تصغير حجم اللوجو */
+        margin-top: 0;
+    }
+    .institution-logo {
+        width: 80px; 
+        height: 80px;
+        margin: 0 auto;
     }
     
+    /* إخفاء النقطة والخط القديمين تماماً لجعل التصميم عمودياً نظيفاً */
     .timeline-dot {
-        left: 5px; 
-        top: 0;
-        transform: none; 
+        display: none; 
     }
     
+    /* البطاقة ثانيًا */
     .timeline-content {
+        order: 2; /* البطاقة ثانيًا */
         padding: 20px; 
         max-width: 100%; 
         width: 100%; 
+        text-align: center; /* توسيط محتوى البطاقة */
     }
-
-    /* 6. Contact Section */
-    .social-links a { 
-        width: 40px; 
-        height: 40px; 
-        font-size: 1.1rem; 
+    .timeline-content p {
+        text-align: center; /* التأكد من توسيط النص الداخلي */
     }
 }
 
@@ -555,7 +530,7 @@ h2.section-title::after {
 
 
 /* ---------------------------------- */
-/* 9. Education Timeline      */
+/* 9. Education Timeline (Desktop)      */
 /* ---------------------------------- */
 .timeline-section {
     background-color: #f7f7f7; 
@@ -564,6 +539,7 @@ h2.section-title::after {
     max-width: 1000px;
     margin: 0 auto;
     position: relative;
+    /* مسافة الخط على الديسكتوب */
     padding-left: 30px; 
 }
 /* الخط الأزرق العمودي للـ Timeline على الديسكتوب */
@@ -583,7 +559,7 @@ h2.section-title::after {
     position: relative;
     padding-left: 30px;
     display: flex;
-    flex-direction: row-reverse; 
+    flex-direction: row-reverse; /* الترتيب الافتراضي (اللوجو على اليمين) */
     align-items: flex-start;
     gap: 80px; 
 }
@@ -611,6 +587,7 @@ h2.section-title::after {
     flex-shrink: 0; 
     width: 120px; 
     margin-top: 25px; 
+    display: block; /* للتأكد من ظهوره على الديسكتوب */
 }
 .institution-logo {
     width: 120px; 
@@ -774,66 +751,62 @@ footer {
         padding: 60px 4%; 
     }
     
-    /* ************* التعديل على ترتيب About Me: صورة ⬅️ نص ⬅️ إحصائيات ************* */
+    /* قسم About Me (الترتيب: صورة ⬅️ نص ⬅️ إحصائيات) */
     .about-container { 
         flex-direction: column; 
         gap: 25px; 
     }
-    
-    /* 1. الصورة */
-    .about-image { 
-        order: 1; 
-        margin-bottom: 0; 
-    }
-    .profile-image { 
-        width: 180px; 
-        height: 180px; 
-    }
-    
-    /* 2. النص */
-    .about-text { 
-        order: 2; 
-        text-align: center; 
-    }
-    .about-text p { 
-        text-align: justify; 
-        font-size: 1rem;
-    } 
-    
-    /* 3. الإحصائيات */
-    .stats-grid { 
-        order: 3; 
-        flex-direction: column; 
-        gap: 15px; 
-        padding: 15px 0; 
-        width: 100%; 
-        box-shadow: none; 
-        border: none;
-        background: transparent;
-        margin-top: 0; 
-    }
+    .about-image { order: 1; margin-bottom: 0; }
+    .profile-image { width: 180px; height: 180px; }
+    .about-text { order: 2; text-align: center; }
+    .about-text p { text-align: justify; font-size: 1rem;} 
+    .stats-grid { order: 3; flex-direction: column; gap: 15px; padding: 15px 0; width: 100%; box-shadow: none; border: none; background: transparent; margin-top: 0; }
     .stat-item h3 { font-size: 2.5rem; }
-    /* ******************************************************************************** */
     
     
-    /* Education Timeline (للتأكد من ظهوره بشكل سليم) */
+    /* ************* قسم Education Timeline (الترتيب: لوجو ⬅️ بطاقة) ************* */
     .timeline-container { 
-        border-left: 3px solid var(--primary-dark);
-        padding-left: 20px; 
+        border-left: none; /* إزالة الخط العمودي */
+        padding-left: 0; 
     }
+    
     .timeline-item {
+        flex-direction: column; /* جعل الترتيب عموديًا */
+        align-items: center;
+        gap: 15px; 
         margin-bottom: 40px;
+        padding-left: 0;
+        text-align: center;
     }
+    
+    /* اللوجو - أولاً */
     .institution-logo-container {
+        display: block; /* إظهار اللوجو */
+        order: 1; 
+        width: 80px; 
+        margin-top: 0;
+    }
+    .institution-logo {
+        width: 80px; 
+        height: 80px;
+    }
+    
+    /* النقطة - إخفاءها */
+    .timeline-dot {
         display: none; 
     }
-    .timeline-dot {
-        left: 5px; 
-    }
+    
+    /* البطاقة - ثانيًا */
     .timeline-content {
+        order: 2; 
         padding: 15px; 
         width: 100%; 
+        text-align: center;
     }
+    .timeline-content p {
+        text-align: center;
+    }
+    /* ****************************************************************************** */
 
     /* Social Icons */
     .social-links a { 
