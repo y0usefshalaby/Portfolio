@@ -228,48 +228,48 @@
     <script>
         AOS.init({ duration: 800 });
         
-        // ************* Smooth Scrolling & Navigation Highlighting (JS Part) *************
+        
         
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
         const navLinks = document.querySelectorAll('.nav-link');
         
-        // 1. Hamburger Menu Toggle (Opens/Closes the menu using 'active' class)
+        
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
             document.body.classList.toggle('no-scroll');
         });
 
-        // 2. Smooth Scrolling for all internal links AND closing the mobile menu on click
+       
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                // Prevent default anchor click
+                
                 e.preventDefault();
                 
                 const targetId = this.getAttribute('href');
                 
-                // Close mobile menu if open
+                
                 if (navMenu.classList.contains('active')) {
                     navMenu.classList.remove('active');
                     hamburger.classList.remove('active');
                     document.body.classList.remove('no-scroll');
                 }
 
-                // Smooth Scroll logic
+             
                 document.querySelector(targetId).scrollIntoView({
                     behavior: 'smooth'
                 });
             });
         });
 
-        // 3. Navigation Highlighting (Updates the active link when scrolling)
+       
         const sections = document.querySelectorAll('section[id]');
         window.addEventListener('scroll', () => {
             let current = '';
             
             sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100; // Offset for fixed navbar
+                const sectionTop = section.offsetTop - 100; 
                 const sectionHeight = section.clientHeight;
                 if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
                     current = section.getAttribute('id');
@@ -283,7 +283,7 @@
                 }
             });
         });
-        // ********************************************************************************
+        
         
     </script>
     <script src="script.js"></script>
