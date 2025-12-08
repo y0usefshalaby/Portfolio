@@ -18,6 +18,7 @@
 * {
     margin: 0;
     padding: 0;
+    /* 🔑 ضمان أن الهوامش والإطارات لا تزيد من عرض العنصر (Box Sizing) */
     box-sizing: border-box;
 }
 
@@ -36,7 +37,9 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
-    overflow-x: hidden; /* لمنع أي شرائط أفقية غير مرغوب فيها */
+    /* 🔑 الحل النهائي للزيادة الأفقية: منع التمرير الأفقي بشكل قاطع */
+    overflow-x: hidden; 
+    width: 100%;
 }
 
 body.no-scroll { overflow: hidden; } 
@@ -68,7 +71,8 @@ ul { list-style: none; }
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 5%;
+    /* 🛠️ تقليل Padding في شريط التنقل */
+    padding: 0 3%;
     display: flex; 
     justify-content: space-between; 
     align-items: center;
@@ -169,17 +173,24 @@ ul { list-style: none; }
         text-align: left; 
         justify-content: center; 
         padding-top: 0; 
+        /* 🛠️ حل مشكلة سلاسة الظهور (Transition موجودة على خاصية left) */
         transition: left 0.4s ease; 
         box-shadow: 5px 0 15px rgba(0,0,0,0.5);
         gap: 40px; 
     }
     
     .nav-menu.active { 
-        left: 0; /* ظهور القائمة */
+        left: 0; /* ظهور القائمة (مُصممة لتكون انسيابية) */
     }
 
     .nav-container {
          padding: 0 4%; 
+    }
+    
+    /* 🛠️ تعديل Padding الأقسام للتابلت */
+    .section { 
+        padding: 80px 4%; 
+        width: 100%; 
     }
     
     /* 🛠️ تعديلات قسم About للتابلت/شاشات صغيرة */
@@ -188,10 +199,28 @@ ul { list-style: none; }
         gap: 30px;
         text-align: center; 
     }
-    .about-image { order: -1; } /* وضع الصورة في الأعلى */
-    .about-text p { text-align: justify; }
-    .stats-grid { flex-wrap: wrap; justify-content: center; gap: 20px; }
-    .stat-item { flex-basis: 30%; max-width: 100px; } /* لضمان عرض 3 عناصر في صف */
+    /* 🔑 الترتيب: الصورة (أولاً) ثم النص (ثانياً) ثم الإحصائيات (ثالثاً) */
+    .about-image { order: -1; } 
+    .about-text {
+        order: 0;
+        text-align: center;
+        /* 🛠️ لضمان أن الكلام لا يكون "طويلاً ورفيعاً" بل يأخذ عرض الشاشة */
+        width: 100%; 
+        max-width: none; 
+    }
+    .about-text p { 
+        text-align: justify;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .stats-grid { 
+        order: 1;
+        flex-wrap: wrap; 
+        justify-content: center; 
+        gap: 20px; 
+    }
+    .stat-item { flex-basis: 30%; max-width: 100px; } 
 
     /* 🛠️ تعديلات قسم Education للتابلت/شاشات صغيرة */
     .timeline-item {
@@ -200,10 +229,15 @@ ul { list-style: none; }
         text-align: center;
         gap: 15px;
     }
-    .institution-logo-container { margin-top: 0; }
+    /* 🔑 الترتيب: الشعار (فوق) ثم المحتوى (تحت) */
+    .institution-logo-container { 
+        margin-top: 0; 
+        order: -1; 
+    }
     .timeline-content {
         width: 100%; 
         text-align: center; 
+        order: 0; 
     }
 }
 
@@ -212,42 +246,50 @@ ul { list-style: none; }
 /* ---------------------------------- */
 @media (max-width: 600px) {
     .nav-menu { 
-        width: 70%; /* عرض أكبر للهواتف الصغيرة لسهولة التصفح */
+        width: 70%; 
         padding: 20px;
     }
     
-    .hero-content h1 { font-size: 2.8rem; }
-    .hero h2 { font-size: 1.4rem; }
+    /* 🔑 تصغير خطوط الـ Hero على الهواتف (حل مشكلة حجم الخط) */
+    .hero-content h1 { font-size: 2.2rem; margin: 5px 0; }
+    .hero h2 { font-size: 1.1rem; margin-bottom: 20px; }
+    
+    /* تصغير الأزرار وضمان ظهورها بشكل متناسق */
+    .cta-buttons { 
+        flex-direction: row; 
+        gap: 10px; 
+        flex-wrap: wrap; 
+        justify-content: center;
+    }
     
     .main-cta-btn, .secondary-cta-btn {
-        padding: 10px 20px; 
-        font-size: 0.9rem;
+        padding: 10px 15px; 
+        font-size: 0.85rem;
     }
-    .cta-buttons { flex-direction: column; gap: 15px; }
-
-    h2.section-title { font-size: 2rem; margin-bottom: 30px; }
-    .section { padding: 60px 4%; }
     
-    /* 🛠️ تعديلات قسم About للهواتف */
+    h2.section-title { font-size: 1.8rem; margin-bottom: 30px; }
+    /* 🔑 تقليل Padding الأقسام للهواتف لترك مساحة أكبر للمحتوى (3% padding) */
+    .section { padding: 60px 3%; } 
+    
+    /* تعديلات قسم About للهواتف */
     .stats-grid { flex-direction: column; gap: 25px; padding: 25px; }
     .stat-item { max-width: none; }
     
-    /* 🛠️ تعديلات قسم Skills للهواتف */
-    .skills-category { padding: 25px; }
-    .skills-grid { justify-content: center; } /* جعل الـ tags في المنتصف */
-    .skill-tag { font-size: 0.9rem; }
+    /* تعديلات قسم Skills للهواتف */
+    .skills-category { padding: 20px; }
+    .skills-grid { justify-content: center; } 
+    .skill-tag { font-size: 0.9rem; padding: 8px 15px; }
     
-    /* 🛠️ تعديلات قسم Certificates للهواتف */
+    /* تعديلات قسم Certificates للهواتف */
     .certificates-grid {
-        /* يتم التحكم بها بواسطة minmax(300px, 1fr) وستتحول إلى عمود واحد إذا كانت الشاشة أصغر من 300px */
         grid-template-columns: 1fr; 
     }
     
     .social-links { gap: 15px; }
-    .social-links a { width: 45px; height: 45px; font-size: 1.2rem; }
+    .social-links a { width: 40px; height: 40px; font-size: 1.1rem; }
     
-    .email-link { font-size: 1.1rem; }
-    .email-link i { margin-right: 8px; font-size: 1.3rem; }
+    .email-link { font-size: 1rem; }
+    .email-link i { margin-right: 8px; font-size: 1.2rem; }
 }
 
 /* ---------------------------------- */
@@ -263,6 +305,7 @@ ul { list-style: none; }
     color: var(--white);
     position: relative;
     box-shadow: inset 0 -10px 20px rgba(0,0,0,0.5); 
+    width: 100%;
 }
 
 .hero-content h1 {
@@ -287,7 +330,7 @@ ul { list-style: none; }
 .cursor {
     display: inline-block;
     width: 3px; 
-    height: 1.2em; /* لتكون متناسقة مع ارتفاع النص */
+    height: 1.2em; 
     background-color: var(--primary-color);
     animation: blink 0.8s infinite;
 }
@@ -310,6 +353,7 @@ ul { list-style: none; }
     cursor: pointer;
     transition: var(--transition-smooth);
     border: 2px solid var(--primary-color);
+    white-space: nowrap; 
 }
 
 .main-cta-btn:hover {
@@ -336,9 +380,11 @@ ul { list-style: none; }
 /* 6. Sections Styling (Global) */
 /* ---------------------------------- */
 .section {
-    padding: 100px 5%; 
+    /* 🔑 إزالة الـ Padding الأفقي العالمي هنا، ووضعه فقط في الـ Media Queries */
+    padding: 100px 0; 
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%; 
 }
 
 h2.section-title {
@@ -470,7 +516,6 @@ h2.section-title::after {
     flex-direction: row; 
     align-items: flex-start;
     gap: 30px; 
-    justify-content: center; 
 }
 
 .institution-logo-container {
@@ -524,7 +569,7 @@ h2.section-title::after {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    justify-content: start; /* تأكيد المحاذاة لليسار على الديسكتوب */
+    justify-content: start; 
 }
 
 .skill-tag {
@@ -559,21 +604,19 @@ h2.section-title::after {
 
 .certificates-grid {
     display: grid;
-    /* عمودان على الديسكتوب، ويتحول إلى عمود واحد تلقائياً على الشاشات الأصغر من 300px */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
     gap: 30px; 
     padding: 20px 0;
 }
 
 .certificate-card {
-    /* ترث التنسيق من smooth-card */
     text-align: center;
     padding: 40px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    min-height: 250px; /* لضمان ارتفاع موحد */
+    min-height: 250px; 
 }
 
 .cert-icon {
@@ -629,7 +672,6 @@ h2.section-title::after {
 }
 
 .projects-content {
-    /* تطبيق smooth-card عليها بالفعل في HTML */
     max-width: 600px;
     margin: 0 auto;
     padding: 50px 30px; 
@@ -651,23 +693,19 @@ h2.section-title::after {
     text-align: center; 
     background: #f8f8f8; 
     padding-bottom: 50px; 
+    width: 100%; 
 }
 
-/* 1. تعديل محاذاة النص وجعلها في المنتصف */
 .contact-section p {
     max-width: 600px;
-    /* تقليل الهامش السفلي قليلاً */
     margin: 20px auto 30px; 
     font-size: 1.1rem;
     color: #444; 
     line-height: 1.7;
-    /* التعديل الرئيسي: جعل النص في المنتصف (center) */
     text-align: center; 
 }
 
-/* 2. التحكم في الفراغ بين الإيميل وأيقونات الميديا */
 .contact-details {
-    /* تم تقليل الهامش السفلي لتقريب أيقونات الميديا */
     margin: 40px auto 20px; 
     text-align: center; 
 }
@@ -705,49 +743,32 @@ h2.section-title::after {
     display: flex;
     justify-content: center;
     gap: 25px;
+    width: 100%; 
 }
 
 
 .social-links a {
-
     width: 55px;
-
     height: 55px;
-
     background: var(--white);
-
     border-radius: 50%;
-
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
-
     border: 1px solid #ddd;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     font-size: 1.4rem;
-
     color: var(--secondary-color);
-
     transition: var(--transition-smooth);
-
 }
 
 
 
 .social-links a:hover {
-
     background: var(--primary-color);
-
     color: var(--white);
-
     transform: translateY(-8px) rotate(2deg);
-
     box-shadow: 0 15px 30px rgba(0, 123, 255, 0.4);
-
 }
 
 /* ---------------------------------- */
