@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Portfolio • Yousef Shalaby </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header class="navbar">
         <div class="nav-container">
-            <a href="#home" class="logo">Yousef Shalaby<span class="logo-dot"></span></a> 
+            <a href="#home" class="logo">Yousef Shalaby<span class="logo-dot">.</span></a> 
 
             <div class="hamburger">
                 <span class="bar"></span>
@@ -35,29 +36,27 @@
             <h2><span class="typewriter-text"></span><span class="cursor">|</span></h2> 
             <p class="tagline">Building Secure Solutions, Crafting Clean & Safe Code.</p>
             <div class="cta-buttons">
-                <button id="view-projects-btn" class="main-cta-btn"><i class="fas fa-laptop-code"></i> View Projects </button>
-                
+                <a href="#projects" id="view-projects-btn" class="main-cta-btn"><i class="fas fa-laptop-code"></i> View Projects</a>
                 <a href="CV/Yousef Shalaby CV.pdf" class="secondary-cta-btn" target="_blank"><i class="fas fa-download"></i> Download CV</a>
             </div>
         </div> 
     </section>
 
-    <section id="about" class="section">
-        <h2 class="section-title"><i class="fas fa-user-tie icon-header"></i> About Me</h2>
+    <section id="about" class="about-section section">
+        <h2 class="section-title" data-aos="fade-up">
+            <i class="fas fa-user-tie"></i> About Me 
+        </h2> 
         
-        <div class="about-container">
-            <div class="about-image" data-aos="fade-right">
-                <img src="assets/images/yousef-profile.jpg" alt="Yousef Shalaby Profile Picture">
-            </div>
+        <div class="container about-container" data-aos="fade-up">
             
-            <div class="about-text" data-aos="fade-left">
+            <div class="about-text" data-aos="fade-right">
                 <h3>Hello! I'm Yousef Shalaby, a dedicated Cybersecurity Specialist.</h3>
                 
                 <p>
-                    My current field of study is Information Systems, and I graduated from high school with a specialization in Security Systems. I am actively working on developing my skills to transition from networking studies into the field of **cybersecurity**, which is my passion in technology.
+                    My current field of study is **Information Systems**, and I graduated from high school with a specialization in **Security Systems**. I am working on developing my skills to advance from studying the field of networking to the field of **cybersecurity** as it is my favorite field of dealing with technology.
                 </p>
                 <p>
-                    I enjoy exploring technical challenges, creating practical solutions, and planning new content for my YouTube channel. My focus is always on building secure and clean systems.
+                    In addition to my technical focus, I enjoy exploring technical challenges, creating practical solutions, and planning new content for my **YouTube channel**. My focus is always on building secure and clean systems.
                 </p>
 
                 <div class="stats-grid">
@@ -75,8 +74,14 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="about-image" data-aos="fade-left">
+                <img src="assets/images/yousef-shalaby-profile.png" alt="Yousef Shalaby Profile" class="profile-image">
+            </div>
+
         </div>
     </section>
+            
     <section id="skills" class="section skills-section">
         <h2 class="section-title"><i class="fas fa-code icon-header"></i> Technical Stack</h2>
         <div class="skills-category" data-aos="zoom-in">
@@ -119,7 +124,6 @@
         </p>
     </footer>
 
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 800 });
