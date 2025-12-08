@@ -36,8 +36,7 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
-    /* حل مشكلة الزيادة الجانبية (Overflow) */
-    overflow-x: hidden; 
+    overflow-x: hidden; /* لمنع أي شرائط أفقية غير مرغوب فيها */
 }
 
 body.no-scroll { overflow: hidden; } 
@@ -75,13 +74,13 @@ ul { list-style: none; }
     align-items: center;
 }
 
+/* القائمة على الديسكتوب */
 .nav-menu {
     display: flex; 
     gap: 30px; 
     align-items: center;
 }
 
-/* 1. اللوجو - اللون الأبيض ثابت */
 .logo {
     font-size: 1.8rem;
     font-weight: 700;
@@ -100,7 +99,6 @@ ul { list-style: none; }
     display: inline-block;
 }
 
-/* تنسيق الروابط */
 .nav-link {
     color: var(--text-on-dark); 
     font-weight: 500;
@@ -133,7 +131,7 @@ ul { list-style: none; }
     width: 100%;
 }
 
-/* زر الهامبرغر - مخفي على الديسكتوب */
+/* زر الهامبرغر */
 .hamburger {
     display: none; 
     cursor: pointer;
@@ -155,120 +153,81 @@ ul { list-style: none; }
 /* ---------------------------------- */
 @media (max-width: 992px) { 
     
-    /* 1. القائمة العلوية */
+    /* تفعيل زر الهامبرغر */
     .hamburger { display: block; }
-    .nav-menu { display: none; } 
     
+    /* القائمة الجانبية في الموبايل */
     .nav-menu {
+        display: flex; 
         position: fixed;
-        left: -100%; 
+        left: -100%; /* تكون مخفية في البداية */
         top: 0;
         flex-direction: column; 
         background-color: var(--secondary-color); 
-        width: 70%; 
+        width: 50%; /* تم تقليل عرض القائمة للتابلت */
         height: 100vh;
         text-align: left; 
         justify-content: center; 
         padding-top: 0; 
-        transition: 0.4s ease;
+        transition: left 0.4s ease; 
         box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+        gap: 40px; 
     }
     
     .nav-menu.active { 
-        left: 0;
-        display: flex;
+        left: 0; /* ظهور القائمة */
     }
 
-    /* 2. العناوين والأقسام */
-    h2.section-title { 
-        font-size: 2rem; 
-        margin-bottom: 40px; 
-    }
-    .section { 
-        padding: 80px 4%; /* تقليل الـ padding الجانبي لـ 4% */
-    }
     .nav-container {
          padding: 0 4%; 
     }
     
-    /* 3. قسم About Me (الترتيب: صورة ⬅️ نص ⬅️ إحصائيات) */
-    .about-container { 
-        flex-direction: column; 
-        align-items: center; 
-        text-align: center; 
-        gap: 30px; 
-    }
-    .about-image { order: 1; margin-bottom: 0; }
-    .about-text { order: 2; padding-top: 0; text-align: center; }
-    .about-text p { text-align: justify; padding: 0 5px; }
-    .stats-grid { 
-        order: 3; 
-        flex-direction: column; 
-        gap: 20px; 
-        padding: 20px 10px; 
-        margin-top: 0;
-        width: 100%; 
-        max-width: 400px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    /* 4. قسم Education Timeline (الترتيب: اللوجو ⬅️ البطاقة - عمودي) */
-    .timeline-container { 
-        border-left: none; /* تم إلغاؤه */
-        padding-left: 0; 
-        max-width: 95%; 
-    }
-    .timeline-container::before { content: none; } /* تم إلغاؤه */
-    
     .timeline-item {
         flex-direction: column; 
         align-items: center; 
-        gap: 15px; 
-        margin-bottom: 50px;
-        padding-left: 0; 
         text-align: center;
     }
     
-    /* اللوجو أولاً */
-    .institution-logo-container {
-        display: block; 
-        order: 1; 
-        width: 80px; 
-        margin-top: 0;
-    }
-    .institution-logo {
-        width: 80px; 
-        height: 80px;
-        margin: 0 auto;
-    }
-    
-    /* إخفاء النقطة */
-    .timeline-dot {
-        display: none; 
-    }
-    
-    /* البطاقة ثانيًا */
     .timeline-content {
-        order: 2; 
-        padding: 20px; 
-        max-width: 100%; 
         width: 100%; 
         text-align: center; 
     }
-    .timeline-content p {
+    
+    .about-container {
+        flex-direction: column; 
+        gap: 30px;
         text-align: center; 
     }
-    /* 5. Contact Section */
-    .social-links a { 
-        width: 40px; 
-        height: 40px; 
-        font-size: 1.1rem; 
-    }
+    .about-text p { text-align: justify; }
+
 }
 
 /* ---------------------------------- */
-/* 4. Hero Section (Smooth & Dark) */
+/* 4. Phone Optimization (max-width: 600px) */
+/* ---------------------------------- */
+@media (max-width: 600px) {
+    .nav-menu { 
+        width: 70%; /* عرض أكبر للهواتف الصغيرة لسهولة التصفح */
+        padding: 20px;
+    }
+    
+    .hero-content h1 { font-size: 2.8rem; }
+    .hero h2 { font-size: 1.4rem; }
+    
+    .main-cta-btn, .secondary-cta-btn {
+        padding: 10px 20px; 
+        font-size: 0.9rem;
+    }
+    .cta-buttons { flex-direction: column; gap: 15px; }
+
+    h2.section-title { font-size: 2rem; margin-bottom: 30px; }
+    .section { padding: 60px 4%; }
+    
+    .social-links a { width: 45px; height: 45px; font-size: 1.2rem; }
+}
+
+/* ---------------------------------- */
+/* 5. Hero Section (Smooth & Dark) */
 /* ---------------------------------- */
 .hero {
     height: 100vh;
@@ -304,6 +263,7 @@ ul { list-style: none; }
 .cursor {
     display: inline-block;
     width: 3px; 
+    height: 1.2em; /* لتكون متناسقة مع ارتفاع النص */
     background-color: var(--primary-color);
     animation: blink 0.8s infinite;
 }
@@ -344,11 +304,12 @@ ul { list-style: none; }
 .secondary-cta-btn:hover {
     background: var(--white);
     color: var(--secondary-color);
+    border-color: var(--white);
     transform: translateY(-5px);
 }
 
 /* ---------------------------------- */
-/* 5. Sections Styling (Global) */
+/* 6. Sections Styling (Global) */
 /* ---------------------------------- */
 .section {
     padding: 100px 5%; 
@@ -356,7 +317,6 @@ ul { list-style: none; }
     margin: 0 auto;
 }
 
-/* Section Title with Icon */
 h2.section-title {
     text-align: center;
     font-size: 3rem; 
@@ -388,7 +348,24 @@ h2.section-title::after {
 }
 
 /* ---------------------------------- */
-/* 6. About Section Styling (Desktop) */
+/* 7. Global Smooth Card Style        */
+/* ---------------------------------- */
+.smooth-card {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 15px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+    transition: all 0.4s ease;
+    border: 1px solid #eee;
+}
+
+.smooth-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------------------------------- */
+/* 8. About Section Styling */
 /* ---------------------------------- */
 .about-section {
     background-color: var(--white);
@@ -396,15 +373,10 @@ h2.section-title::after {
 
 .about-container {
     display: flex;
-    flex-direction: row; /* الترتيب الافتراضي (الديسكتوب) */
+    flex-direction: row; 
     gap: 80px;
     align-items: center; 
     padding-top: 0; 
-}
-
-.about-image {
-    flex-shrink: 0; 
-    text-align: center;
 }
 
 .profile-image {
@@ -417,11 +389,6 @@ h2.section-title::after {
     transition: var(--transition-smooth);
     display: block; 
     margin: 0 auto; 
-}
-
-.profile-image:hover {
-    transform: scale(1.05) rotate(3deg); 
-    box-shadow: 0 15px 40px rgba(0, 123, 255, 0.4);
 }
 
 .about-text {
@@ -441,11 +408,7 @@ h2.section-title::after {
     color: var(--text-color);
     line-height: 1.8;
     font-size: 1.05rem; 
-    text-align: left; /* الترتيب الافتراضي (الديسكتوب) */
-}
-
-.about-text p strong {
-    color: var(--primary-dark);
+    text-align: left; 
 }
 
 /* Stats Grid */
@@ -459,82 +422,12 @@ h2.section-title::after {
     border-radius: 20px; 
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); 
     border: 1px solid #eee;
-    transition: var(--transition-smooth);
-}
-.stats-grid:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); 
 }
 .stat-item h3 { font-size: 3rem; color: var(--primary-color); }
 .stat-item p { color: var(--text-light); font-weight: 500;}
 
 /* ---------------------------------- */
-/* 7. Skills Section */
-/* ---------------------------------- */
-.skills-category {
-    background: var(--white);
-    padding: 35px;
-    border-radius: 15px;
-    box-shadow: var(--shadow-light);
-    margin-bottom: 40px;
-    transition: var(--transition-smooth);
-    border-left: 5px solid var(--primary-color);
-}
-.skills-category:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); }
-
-.skills-category h3 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    color: var(--primary-dark);
-}
-
-.skills-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-.skill-tag {
-    background: #eef2ff; 
-    padding: 10px 20px;
-    border-radius: 25px; 
-    font-weight: 600;
-    border: 1px solid var(--primary-color);
-    transition: var(--transition-smooth);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--secondary-color);
-}
-.skill-tag:hover {
-    background: var(--primary-color);
-    color: var(--white);
-    transform: scale(1.05);
-}
-.skill-tag i {
-    font-size: 1.1rem;
-}
-
-
-/* ---------------------------------- */
-/* 8. Global Smooth Card Style        */
-/* ---------------------------------- */
-.smooth-card {
-    background-color: var(--white);
-    padding: 30px;
-    border-radius: 15px; 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
-    transition: all 0.4s ease;
-    border: 1px solid #eee;
-}
-
-.smooth-card:hover {
-    transform: translateY(-5px); 
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-}
-
-
-/* ---------------------------------- */
-/* 9. Education Timeline (Standard)      */
+/* 9. Education Timeline */
 /* ---------------------------------- */
 .timeline-section {
     background-color: #f7f7f7; 
@@ -543,47 +436,23 @@ h2.section-title::after {
     max-width: 1000px;
     margin: 0 auto;
     position: relative;
-    /* إلغاء البادينج الخاص بالخط */
     padding-left: 0; 
-}
-/* ************* إزالة الخط العمودي للـ Timeline ************* */
-.timeline-container::before {
-    content: none; 
 }
 
 .timeline-item {
-    margin-bottom: 40px; /* تقليل المسافة بما أنه لا يوجد خط */
+    margin-bottom: 40px; 
     position: relative;
-    /* إلغاء البادينج الخاص بالخط */
-    padding-left: 0;
-    
-    /* جعل العناصر في سطر واحد على الديسكتوب (افتراضياً) */
     display: flex;
     flex-direction: row; 
     align-items: flex-start;
-    gap: 30px; /* تقليل المسافة بين اللوجو والبطاقة */
-    justify-content: center; /* توسيط العناصر في المنتصف */
-}
-
-/* ************* إزالة النقطة ************* */
-.timeline-dot {
-    display: none; 
-}
-
-.timeline-content {
-    /* السماح للبطاقة بأخذ جزء كبير من العرض */
-    width: 100%; 
-    max-width: 700px; 
-    flex-grow: 1; 
-    padding: 30px; /* تقليل البادينج الداخلي */
-    text-align: left; 
-    margin-right: 0; 
+    gap: 30px; 
+    justify-content: center; 
 }
 
 .institution-logo-container {
     flex-shrink: 0; 
-    width: 100px; /* تصغير اللوجو قليلاً على الديسكتوب أيضاً */
-    margin-top: 15px; /* رفع اللوجو قليلاً ليتماشى مع البطاقة */
+    width: 100px; 
+    margin-top: 15px; 
     display: block; 
     text-align: center;
 }
@@ -592,12 +461,8 @@ h2.section-title::after {
     height: 100px;
     object-fit: contain; 
     border-radius: 10px; 
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* تخفيف الظل */
-    transition: transform 0.3s ease; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
     display: block; 
-}
-.institution-logo:hover {
-    transform: scale(1.05); 
 }
 .timeline-date {
     display: block;
@@ -607,126 +472,367 @@ h2.section-title::after {
     font-size: 0.9rem;
 }
 
+/* ---------------------------------- */
+
+/* 7. Skills Section */
 
 /* ---------------------------------- */
-/* 10. Certificates Grid              */
+
+.skills-category {
+
+    background: var(--white);
+
+    padding: 35px;
+
+    border-radius: 15px;
+
+    box-shadow: var(--shadow-light);
+
+    margin-bottom: 40px;
+
+    transition: var(--transition-smooth);
+
+    border-left: 5px solid var(--primary-color);
+
+}
+
+.skills-category:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); }
+
+
+
+.skills-category h3 {
+
+    font-size: 1.5rem;
+
+    margin-bottom: 20px;
+
+    color: var(--primary-dark);
+
+}
+
+
+
+.skills-grid {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+
+}
+
+.skill-tag {
+
+    background: #eef2ff;
+
+    padding: 10px 20px;
+
+    border-radius: 25px;
+
+    font-weight: 600;
+
+    border: 1px solid var(--primary-color);
+
+    transition: var(--transition-smooth);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: var(--secondary-color);
+
+}
+
+.skill-tag:hover {
+
+    background: var(--primary-color);
+
+    color: var(--white);
+
+    transform: scale(1.05);
+
+}
+
+.skill-tag i {
+
+    font-size: 1.1rem;
+
+}
+
+
+
+
+
+/* ---------------------------------- */
+
+/* 8. Global Smooth Card Style        */
+
+/* ---------------------------------- */
+
+.smooth-card {
+
+    background-color: var(--white);
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+    transition: all 0.4s ease;
+
+    border: 1px solid #eee;
+
+}
+
+
+
+.smooth-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+
+}
+/* ---------------------------------- */
+/* 11. Certificates Section (New Design) */
 /* ---------------------------------- */
 .certificates-section {
-    padding-top: 100px;
-    padding-bottom: 100px;
+    background-color: #f7f7f7; 
 }
+
 .certificates-grid {
-    display: flex;
-    justify-content: center; 
-    gap: 30px;
-    margin-top: 50px;
+    display: grid;
+    /* عمودان على الديسكتوب */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px; 
+    padding: 20px 0;
 }
+
 .certificate-card {
+    /* ترث التنسيق من smooth-card */
     text-align: center;
-    padding: 40px 30px;
-    max-width: 400px;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 250px; /* لضمان ارتفاع موحد */
 }
 
 .cert-icon {
-    font-size: 3rem;
+    font-size: 3.5rem;
     color: var(--primary-color);
     margin-bottom: 15px;
 }
+
 .certificate-card h4 {
-    font-size: 1.4rem;
-    margin-bottom: 10px;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    color: var(--secondary-color);
 }
+
 .cert-issuer {
     color: var(--text-light);
     font-weight: 500;
-    margin-bottom: 15px;
-    display: block;
+    margin-bottom: 10px;
 }
+
 .cert-date {
     display: block;
     font-size: 0.9rem;
-    color: var(--text-light);
-    margin-bottom: 20px;
+    color: var(--primary-dark);
+    margin-bottom: 25px;
+    font-weight: 600;
 }
+
 .btn-cert {
-    display: inline-block;
-    padding: 8px 20px;
+    display: block;
+    padding: 10px 25px;
     border: 2px solid var(--primary-color);
     color: var(--primary-color);
-    text-decoration: none;
-    border-radius: 8px;
+    border-radius: 50px;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: var(--transition-smooth);
+    width: 80%;
+    max-width: 200px;
 }
+
 .btn-cert:hover {
     background-color: var(--primary-color);
     color: var(--white);
-    transform: translateY(-2px);
+    transform: scale(1.05);
 }
 
+/* ---------------------------------- */
+/* 11. Projects Section (المشاريع)    */
+/* ---------------------------------- */
+.projects-section {
+    background-color: #f7f7f7; 
+    text-align: center; 
+}
+
+.projects-content {
+    /* تطبيق smooth-card عليها بالفعل في HTML */
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 50px 30px; 
+}
+.projects-content p {
+    font-size: 1.3rem; 
+    line-height: 1.5;
+}
+.projects-content strong {
+    color: var(--primary-dark);
+    font-size: 1.5rem;
+}
 
 /* ---------------------------------- */
-/* 11. Contact Section */
+/* 13. Contact Section (التعديلات المطلوبة) */
 /* ---------------------------------- */
+
 .contact-section { 
     text-align: center; 
     background: #f8f8f8; 
     padding-bottom: 50px; 
-    overflow-x: hidden; 
-}
-.contact-section p {
-    max-width: 600px;
-    margin: 20px auto 40px;
-    font-size: 1.1rem;
-    color: var(--text-light);
-}
-.contact-details p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    color: var(--secondary-color);
-}
-.contact-details a {
-    color: var(--primary-dark);
-    font-weight: 500;
-    transition: color 0.3s;
-}
-.contact-details a:hover {
-    color: var(--primary-color);
-    text-decoration: underline;
 }
 
-/* ---------------------------------- */
-/* 12. Social Icons Styling - Smooth Look */
-/* ---------------------------------- */
+/* 1. تعديل محاذاة النص وجعلها في المنتصف */
+.contact-section p {
+    max-width: 600px;
+    /* تقليل الهامش السفلي قليلاً */
+    margin: 20px auto 30px; 
+    font-size: 1.1rem;
+    color: #444; 
+    line-height: 1.7;
+    /* التعديل الرئيسي: جعل النص في المنتصف (center) */
+    text-align: center; 
+}
+
+/* 2. التحكم في الفراغ بين الإيميل وأيقونات الميديا */
+.contact-details {
+    /* تم تقليل الهامش السفلي لتقريب أيقونات الميديا */
+    margin: 40px auto 20px; /* 20px هامش سفلي بدلاً من 50px */
+    text-align: center; 
+}
+
+.email-link {
+    display: inline-flex; 
+    align-items: center;
+    font-size: 1.3rem; 
+    font-weight: 600;
+    color: var(--primary-color); 
+    transition: all 0.3s ease-in-out;
+    padding: 10px 15px; 
+    border-radius: 5px;
+    border-bottom: 2px solid var(--primary-color); 
+    line-height: 1; 
+}
+
+.email-link i {
+    margin-right: 12px;
+    font-size: 1.5rem; 
+    color: var(--primary-color);
+}
+
+.email-link:hover {
+    color: var(--white);
+    background-color: var(--primary-color);
+    border-bottom: 2px solid transparent; 
+    transform: translateY(-2px); 
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3); 
+}
+
 .social-links {
-    margin-top: 40px;
+    /* هنا نضمن أن الهامش العلوي صغير للمسة جميلة */
+    margin-top: 20px; 
     margin-bottom: 0; 
     display: flex;
     justify-content: center;
     gap: 25px; 
 }
 
-.social-links a {
-    width: 55px;
-    height: 55px;
-    background: var(--white);
-    border-radius: 50%;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); 
-    border: 1px solid #ddd;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    color: var(--secondary-color);
-    transition: var(--transition-smooth); 
+/* ... باقي تنسيقات social-links */
+
+/* ---------------------------------- */
+/* تعديل النص الرئيسي في قسم التواصل (اختياري) */
+/* ---------------------------------- */
+.contact-section p {
+    max-width: 600px;
+    margin: 20px auto 40px; 
+    font-size: 1.1rem;
+    color: #444; /* لون أغمق قليلاً لتحسين القراءة */
+    line-height: 1.7;
 }
 
-.social-links a:hover {
-    background: var(--primary-color);
-    color: var(--white);
-    transform: translateY(-8px) rotate(2deg); 
-    box-shadow: 0 15px 30px rgba(0, 123, 255, 0.4); 
+/* ---------------------------------- */
+
+/* 12. Social Icons Styling - Smooth Look */
+
+/* ---------------------------------- */
+
+.social-links {
+
+    margin-top: 40px;
+
+    margin-bottom: 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 25px;
+
 }
+
+
+
+.social-links a {
+
+    width: 55px;
+
+    height: 55px;
+
+    background: var(--white);
+
+    border-radius: 50%;
+
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+
+    border: 1px solid #ddd;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 1.4rem;
+
+    color: var(--secondary-color);
+
+    transition: var(--transition-smooth);
+
+}
+
+
+
+.social-links a:hover {
+
+    background: var(--primary-color);
+
+    color: var(--white);
+
+    transform: translateY(-8px) rotate(2deg);
+
+    box-shadow: 0 15px 30px rgba(0, 123, 255, 0.4);
+
+}
+
+
 
 /* ---------------------------------- */
 /* 13. Footer */
@@ -737,82 +843,4 @@ footer {
     text-align: center;
     padding: 25px;
     font-size: 0.9rem;
-}
-
-/* ---------------------------------- */
-/* 14. Mobile/Tablet Optimization (max-width: 768px) */
-/* ---------------------------------- */
-@media (max-width: 768px) { 
-    
-    h2.section-title { font-size: 2.2rem; margin-bottom: 30px; }
-    .section { 
-        padding: 60px 4%; 
-    }
-    
-    /* قسم About Me (الترتيب: صورة ⬅️ نص ⬅️ إحصائيات) */
-    .about-container { flex-direction: column; gap: 25px; }
-    .about-image { order: 1; margin-bottom: 0; }
-    .profile-image { width: 180px; height: 180px; }
-    .about-text { order: 2; text-align: center; }
-    .about-text p { text-align: justify; font-size: 1rem;} 
-    .stats-grid { order: 3; flex-direction: column; gap: 15px; padding: 15px 0; width: 100%; box-shadow: none; border: none; background: transparent; margin-top: 0; }
-    .stat-item h3 { font-size: 2.5rem; }
-    
-    
-    /* ************* قسم Education Timeline (عمودي) ************* */
-    .timeline-container { 
-        padding-left: 0; 
-    }
-    
-    .timeline-item {
-        flex-direction: column; 
-        align-items: center;
-        gap: 15px; 
-        margin-bottom: 40px;
-        padding-left: 0;
-        text-align: center;
-    }
-    
-    .institution-logo-container {
-        display: block; 
-        order: 1; 
-        width: 80px; 
-        margin-top: 0;
-    }
-    .institution-logo {
-        width: 80px; 
-        height: 80px;
-    }
-    
-    .timeline-content {
-        order: 2; 
-        padding: 15px; 
-        width: 100%; 
-        text-align: center;
-    }
-    .timeline-content p {
-        text-align: center;
-    }
-    /* ********************************************************** */
-
-    /* Social Icons */
-    .social-links a { 
-        width: 40px; 
-        height: 40px; 
-    }
-}
-
-/* ---------------------------------- */
-/* 15. Phone Optimization (max-width: 480px) */
-/* ---------------------------------- */
-@media (max-width: 480px) {
-    .hero-content h1 { font-size: 2.5rem; }
-    .hero h2 { font-size: 1.2rem; }
-    
-    .main-cta-btn, .secondary-cta-btn {
-        padding: 10px 20px; 
-        font-size: 0.85rem;
-    }
-    
-    .nav-menu { width: 85%; }
 }
