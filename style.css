@@ -18,12 +18,15 @@
 * {
     margin: 0;
     padding: 0;
-    /* 🔑 ضمان أن الهوامش والإطارات لا تزيد من عرض العنصر (Box Sizing) */
+    /* 🔑 ضمان أن الهوامش والإطارات لا تزيد من عرض العنصر */
     box-sizing: border-box;
 }
 
 html {
     scroll-behavior: smooth;
+    /* 🔑 تطبيق إضافي للقضاء على التجاوز */
+    width: 100vw;
+    overflow-x: hidden;
 }
 
 /* Custom Scrollbar */
@@ -37,9 +40,9 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
-    /* 🔑 الحل النهائي للزيادة الأفقية: منع التمرير الأفقي بشكل قاطع */
+    /* 🔑 الحل النهائي: منع التمرير الأفقي بشكل قاطع */
     overflow-x: hidden; 
-    width: 100%;
+    width: 100vw; /* ضمان أن العرض هو عرض النافذة */
 }
 
 body.no-scroll { overflow: hidden; } 
@@ -164,7 +167,7 @@ ul { list-style: none; }
     .nav-menu {
         display: flex; 
         position: fixed;
-        left: -100%; /* تكون مخفية في البداية */
+        left: -100%; /* مخفية */
         top: 0;
         flex-direction: column; 
         background-color: var(--secondary-color); 
@@ -173,14 +176,14 @@ ul { list-style: none; }
         text-align: left; 
         justify-content: center; 
         padding-top: 0; 
-        /* 🛠️ حل مشكلة سلاسة الظهور (Transition موجودة على خاصية left) */
+        /* 🔑 لضمان الظهور الانسيابي */
         transition: left 0.4s ease; 
         box-shadow: 5px 0 15px rgba(0,0,0,0.5);
         gap: 40px; 
     }
     
     .nav-menu.active { 
-        left: 0; /* ظهور القائمة (مُصممة لتكون انسيابية) */
+        left: 0; /* ظهور القائمة */
     }
 
     .nav-container {
@@ -199,12 +202,11 @@ ul { list-style: none; }
         gap: 30px;
         text-align: center; 
     }
-    /* 🔑 الترتيب: الصورة (أولاً) ثم النص (ثانياً) ثم الإحصائيات (ثالثاً) */
+    /* 🔑 الترتيب المطلوب: الصورة (أولاً) */
     .about-image { order: -1; } 
     .about-text {
         order: 0;
         text-align: center;
-        /* 🛠️ لضمان أن الكلام لا يكون "طويلاً ورفيعاً" بل يأخذ عرض الشاشة */
         width: 100%; 
         max-width: none; 
     }
@@ -215,7 +217,7 @@ ul { list-style: none; }
         margin-right: auto;
     }
     .stats-grid { 
-        order: 1;
+        order: 1; /* 🔑 الإحصائيات (ثالثاً) */
         flex-wrap: wrap; 
         justify-content: center; 
         gap: 20px; 
@@ -229,7 +231,7 @@ ul { list-style: none; }
         text-align: center;
         gap: 15px;
     }
-    /* 🔑 الترتيب: الشعار (فوق) ثم المحتوى (تحت) */
+    /* 🔑 الترتيب المطلوب: الشعار (فوق) */
     .institution-logo-container { 
         margin-top: 0; 
         order: -1; 
@@ -250,11 +252,10 @@ ul { list-style: none; }
         padding: 20px;
     }
     
-    /* 🔑 تصغير خطوط الـ Hero على الهواتف (حل مشكلة حجم الخط) */
+    /* 🔑 تصغير خطوط الـ Hero والأزرار (حل مشكلة حجم الخط) */
     .hero-content h1 { font-size: 2.2rem; margin: 5px 0; }
     .hero h2 { font-size: 1.1rem; margin-bottom: 20px; }
     
-    /* تصغير الأزرار وضمان ظهورها بشكل متناسق */
     .cta-buttons { 
         flex-direction: row; 
         gap: 10px; 
@@ -268,7 +269,7 @@ ul { list-style: none; }
     }
     
     h2.section-title { font-size: 1.8rem; margin-bottom: 30px; }
-    /* 🔑 تقليل Padding الأقسام للهواتف لترك مساحة أكبر للمحتوى (3% padding) */
+    /* 🔑 تقليل Padding الأقسام للهواتف (3% padding) */
     .section { padding: 60px 3%; } 
     
     /* تعديلات قسم About للهواتف */
