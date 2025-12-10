@@ -1,14 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    /* ---------------------------------- */
-    /* Navbar Functionality */
-    /* ---------------------------------- */
+
     const hamburger = document.querySelector(".hamburger");
     const navMenu = document.querySelector(".nav-menu");
     const navbar = document.querySelector(".navbar");
     const navLinks = document.querySelectorAll(".nav-menu a"); 
     
-    // Toggle Hamburger Menu
+    
     if (hamburger && navMenu) {
         hamburger.addEventListener("click", () => {
             hamburger.classList.toggle("active");
@@ -17,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Close Menu on Link Click
+    
     navLinks.forEach(link => link.addEventListener("click", () => {
         if (hamburger && navMenu) {
             hamburger.classList.remove("active");
@@ -26,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }));
 
-    // Navbar Scroll Effect
+   
     window.addEventListener('scroll', () => {
         if (navbar) {
             if (window.scrollY > 50) {
@@ -37,9 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    /* ---------------------------------- */
-    /* Typewriter Effect */
-    /* ---------------------------------- */
+
     const textElement = document.querySelector('.typewriter-text');
     const texts = ["Cybersecurity", "Security Systems Technician"];
     let count = 0;
@@ -57,9 +53,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (index < currentText.length) {
             const letter = currentText.slice(0, ++index);
             textElement.textContent = letter;
-            setTimeout(type, 80); // Smoother typing speed
+            setTimeout(type, 80); 
         } else {
-            setTimeout(erase, 2500); // Longer pause
+            setTimeout(erase, 2500); 
         }
     }
 
@@ -69,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (index > 0) {
             const letter = currentText.slice(0, --index);
             textElement.textContent = letter;
-            setTimeout(erase, 40); // Faster erasing speed
+            setTimeout(erase, 40); 
         } else {
             count++;
             setTimeout(type, 500);
@@ -81,9 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
-    /* ---------------------------------- */
-    /* Active Link Highlighter */
-    /* ---------------------------------- */
+ 
     const sections = document.querySelectorAll('section[id]'); 
 
     const observerOptions = {
